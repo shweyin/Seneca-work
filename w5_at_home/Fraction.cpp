@@ -117,14 +117,12 @@ namespace sict{
 		}
 		return *this;
 	}
-	/*
 	Fraction& Fraction::operator*(const Fraction& rhs)
 	{
 
 	}
 	Fraction& Fraction::operator==(const Fraction& rhs)
 	{
-
 	}
 	Fraction& Fraction::operator!=(const Fraction& rhs)
 	{
@@ -134,6 +132,5 @@ namespace sict{
 	{
 
 	}
-	*/
 
 }
