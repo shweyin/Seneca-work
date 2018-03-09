@@ -160,8 +160,7 @@ namespace sict{
 		{
 			*this = *this + rhs;
 		}
-		*this = temp;
-		return *this;
+		return temp;
 	}
 
 }
