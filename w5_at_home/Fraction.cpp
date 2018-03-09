@@ -112,25 +112,55 @@ namespace sict{
 			temp.numerator = numerator*rhs.denominator + denominator*rhs.numerator;
 			temp.denominator = denominator * rhs.denominator;
 			temp.reduce();
-			numerator = temp.numerator;
-			denominator = temp.denominator;
 		}
+		numerator = temp.numerator;
+		denominator = temp.denominator;
 		return *this;
 	}
 	Fraction& Fraction::operator*(const Fraction& rhs)
 	{
-
+		Fraction temp;
+		if (!this->isEmpty() && !rhs.isEmpty())
+		{
+			temp.numerator = numerator * rhs.numerator;
+			temp.denominator = denominator * rhs.denominator;
+		}
+		numerator = temp.numerator;
+		denominator = temp.denominator;
+		return *this;
 	}
-	Fraction& Fraction::operator==(const Fraction& rhs)
+	bool Fraction::operator==(const Fraction& rhs)
 	{
+		bool isEqual = false;
+		if (!this->isEmpty() && !rhs.isEmpty())
+		{
+			if ((numerator == rhs.numerator) && (denominator == rhs.denominator))
+			{
+				isEqual = true;
+			}
+		}
+		return isEqual;
 	}
-	Fraction& Fraction::operator!=(const Fraction& rhs)
+	bool Fraction::operator!=(const Fraction& rhs)
 	{
-
+		bool notEqual = false;
+		if (!this->isEmpty() && !rhs.isEmpty())
+		{
+			if (!(*this == rhs))
+			{
+				notEqual = false;
+			}
+		}
+		return notEqual;
 	}
 	Fraction& Fraction::operator+=(const Fraction& rhs)
 	{
-
+		Fraction temp;
+		if (!this->isEmpty() && !rhs.isEmpty())
+		{
+			*this = *this + rhs;
+		}
+		return temp;
 	}
 
 }
