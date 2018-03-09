@@ -21,13 +21,14 @@ namespace sict {
 		int min() const;
 		bool isEmpty() const;
 		void display() const;
-		// TODO: declare the + operator overload
 		Fraction& operator+(const Fraction&);
+		/*
+		// TODO: declare the + operator overload
 		Fraction& operator*(const Fraction&);
 		Fraction& operator==(const Fraction&);
 		Fraction& operator!=(const Fraction&);
 		Fraction& operator+=(const Fraction&);
-
+		*/
 	};
 
 }

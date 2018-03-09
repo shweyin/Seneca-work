@@ -1,5 +1,4 @@
 #include <iostream>
-//this too
 // TODO: insert header files
 #include "Fraction.h"
 using namespace std;
@@ -107,20 +106,18 @@ namespace sict{
 	// TODO: implement the + operator
 	Fraction& Fraction::operator+(const Fraction& rhs)
 	{
-		if ((denominator == 0 && numerator == 0) || (rhs.numerator == 0 && rhs.denominator == 0))
-		{
-			denominator = 0;
-			numerator = 0;
-			return *this;
-		}
-		else
+		Fraction temp;
+		if(!this->isEmpty() && !rhs.isEmpty())
 		{
 			numerator = numerator*rhs.denominator + denominator*rhs.numerator;
 			denominator = denominator * rhs.denominator;
 			this->reduce();
-			return *this;
+			temp.numerator = this->numerator;
+			temp.denominator = this->denominator;
 		}
+		return temp;
 	}
+	/*
 	Fraction& Fraction::operator*(const Fraction& rhs)
 	{
 
@@ -137,6 +134,6 @@ namespace sict{
 	{
 
 	}
-
+	*/
 
 }
