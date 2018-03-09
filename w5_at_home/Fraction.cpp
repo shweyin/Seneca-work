@@ -109,13 +109,13 @@ namespace sict{
 		Fraction temp;
 		if(!this->isEmpty() && !rhs.isEmpty())
 		{
-			numerator = numerator*rhs.denominator + denominator*rhs.numerator;
-			denominator = denominator * rhs.denominator;
-			this->reduce();
-			temp.numerator = this->numerator;
-			temp.denominator = this->denominator;
+			temp.numerator = numerator*rhs.denominator + denominator*rhs.numerator;
+			temp.denominator = denominator * rhs.denominator;
+			temp.reduce();
+			numerator = temp.numerator;
+			denominator = temp.denominator;
 		}
-		return temp;
+		return *this;
 	}
 	/*
 	Fraction& Fraction::operator*(const Fraction& rhs)
