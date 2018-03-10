@@ -113,9 +113,7 @@ namespace sict{
 			temp.denominator = denominator * rhs.denominator;
 			temp.reduce();
 		}
-		numerator = temp.numerator;
-		denominator = temp.denominator;
-		return *this;
+		return temp;
 	}
 	Fraction& Fraction::operator*(const Fraction& rhs)
 	{
@@ -125,9 +123,7 @@ namespace sict{
 			temp.numerator = numerator * rhs.numerator;
 			temp.denominator = denominator * rhs.denominator;
 		}
-		numerator = temp.numerator;
-		denominator = temp.denominator;
-		return *this;
+		return temp;
 	}
 	bool Fraction::operator==(const Fraction& rhs)
 	{
@@ -160,8 +156,7 @@ namespace sict{
 		{
 			*this = *this + rhs;
 		}
-		*this = temp;
-		return *this;
+		return temp;
 	}
 
 }

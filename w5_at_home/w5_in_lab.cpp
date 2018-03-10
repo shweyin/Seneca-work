@@ -48,12 +48,17 @@ int main() {
 	e.display();
 	cout << endl;
 
+	Fraction temp;
 	cout << "a + b equals ";
-	(a + b).display();
+	//(a + b).display();
+	temp = a + b;
+	temp.display();
 	cout << endl;
 
 	cout << "b + d equals ";
-	(b + d).display();
+	//(b + d).display();
+	temp = b + d;
+	temp.display();
 	cout << endl;
 
 	return 0;
