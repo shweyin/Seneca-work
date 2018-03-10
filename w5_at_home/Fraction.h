@@ -17,6 +17,7 @@ namespace sict {
 		int min() const;
 		bool isEmpty() const;
 		void display() const;
+		bool are_empty(const Fraction&);
 		Fraction operator+(const Fraction&);
 		Fraction operator*(const Fraction&);
 		bool operator==(const Fraction&);
