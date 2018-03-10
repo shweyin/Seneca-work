@@ -50,21 +50,15 @@ int main() {
 
 	Fraction temp;
 	cout << "a + b equals ";
-	//(a + b).display();
-	temp = a + b;
-	temp.display();
+	(a + b).display();
 	cout << endl;
 
 	cout << "b + d equals ";
-	//(b + d).display();
-	temp = b + d;
-	temp.display();
+	(b + d).display();
 	cout << endl;
 
 	cout << "(b += d) equals ";
-	//(b += d).display();
-	temp = (b += d);
-	temp.display();
+	(b += d).display();
 	cout << endl;
 
 	cout << "b equals ";

@@ -17,11 +17,11 @@ namespace sict {
 		int min() const;
 		bool isEmpty() const;
 		void display() const;
-		Fraction& operator+(const Fraction&);
-		Fraction& operator*(const Fraction&);
+		Fraction operator+(const Fraction&);
+		Fraction operator*(const Fraction&);
 		bool operator==(const Fraction&);
 		bool operator!=(const Fraction&);
-		Fraction& operator+=(const Fraction&);
+		Fraction operator+=(const Fraction&);
 	};
 
 }

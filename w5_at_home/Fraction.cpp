@@ -104,7 +104,7 @@ namespace sict{
 		return torf;
 	}
 	// TODO: implement the + operator
-	Fraction& Fraction::operator+(const Fraction& rhs)
+	Fraction Fraction::operator+(const Fraction& rhs)
 	{
 		Fraction temp;
 		if(!this->isEmpty() && !rhs.isEmpty())
@@ -115,7 +115,7 @@ namespace sict{
 		}
 		return temp;
 	}
-	Fraction& Fraction::operator*(const Fraction& rhs)
+	Fraction Fraction::operator*(const Fraction& rhs)
 	{
 		Fraction temp;
 		if (!this->isEmpty() && !rhs.isEmpty())
@@ -149,12 +149,12 @@ namespace sict{
 		}
 		return notEqual;
 	}
-	Fraction& Fraction::operator+=(const Fraction& rhs)
+	Fraction Fraction::operator+=(const Fraction& rhs)
 	{
 		Fraction temp;
 		if (!this->isEmpty() && !rhs.isEmpty())
 		{
-			*this = *this + rhs;
+			temp = *this + rhs;
 		}
 		return temp;
 	}
