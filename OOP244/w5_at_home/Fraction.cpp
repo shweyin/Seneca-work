@@ -103,37 +103,63 @@ namespace sict{
 		}
 		return torf;
 	}
+	bool Fraction::are_empty(const Fraction& rhs)
+	{
+		return (this->isEmpty() && rhs.isEmpty());
+	}
 	// TODO: implement the + operator
-	Fraction& Fraction::operator+(const Fraction& rhs)
+	Fraction Fraction::operator+(const Fraction& rhs)
 	{
 		Fraction temp;
-		if(!this->isEmpty() && !rhs.isEmpty())
+		if(!this->are_empty(rhs))
 		{
 			temp.numerator = numerator*rhs.denominator + denominator*rhs.numerator;
 			temp.denominator = denominator * rhs.denominator;
 			temp.reduce();
-			numerator = temp.numerator;
-			denominator = temp.denominator;
+		}
+		return temp;
+	}
+	Fraction Fraction::operator*(const Fraction& rhs)
+	{
+		Fraction temp;
+		if (!this->are_empty(rhs))
+		{
+			temp.numerator = numerator * rhs.numerator;
+			temp.denominator = denominator * rhs.denominator;
+		}
+		return temp;
+	}
+	bool Fraction::operator==(const Fraction& rhs)
+	{
+		bool isEqual = false;
+		if (!this->are_empty(rhs))
+		{
+			if ((numerator == rhs.numerator) && (denominator == rhs.denominator))
+			{
+				isEqual = true;
+			}
+		}
+		return isEqual;
+	}
+	bool Fraction::operator!=(const Fraction& rhs)
+	{
+		bool notEqual = false;
+		if (!this->are_empty(rhs))
+		{
+			if (!(*this == rhs))
+			{
+				notEqual = false;
+			}
+		}
+		return notEqual;
+	}
+	Fraction Fraction::operator+=(const Fraction& rhs)
+	{
+		if (!this->are_empty(rhs))
+		{
+			*this = *this + rhs;
 		}
 		return *this;
 	}
-	/*
-	Fraction& Fraction::operator*(const Fraction& rhs)
-	{
-
-	}
-	Fraction& Fraction::operator==(const Fraction& rhs)
-	{
-
-	}
-	Fraction& Fraction::operator!=(const Fraction& rhs)
-	{
-
-	}
-	Fraction& Fraction::operator+=(const Fraction& rhs)
-	{
-
-	}
-	*/
 
 }

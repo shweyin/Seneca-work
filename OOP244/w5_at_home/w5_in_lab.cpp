@@ -9,9 +9,9 @@
 
 #include <iostream>
 #include "Fraction.h"
-using namespace sict;
-using namespace std;
 
+using namespace std;
+using namespace sict;
 
 int main() {
 	cout << "------------------------------" << endl;
@@ -48,28 +48,17 @@ int main() {
 	e.display();
 	cout << endl;
 
+	Fraction temp;
 	cout << "a + b equals ";
-	(a + b).display();
+	//(a + b).display();
+	temp = a + b;
+	temp.display();
 	cout << endl;
 
 	cout << "b + d equals ";
-	(b + d).display();
-	cout << endl;
-
-	cout << "(b += d) equals ";
-	(b += d).display();
-	cout << endl;
-
-	cout << "b equals ";
-	b.display();
-	cout << endl;
-
-	cout << "(a == c) equals ";
-	cout << ((a == c) ? "true" : "false");
-	cout << endl;
-
-	cout << "(a != c) equals ";
-	cout << ((a != c) ? "true" : "false");
+	//(b + d).display();
+	temp = b + d;
+	temp.display();
 	cout << endl;
 
 	return 0;
