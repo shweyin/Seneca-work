@@ -10,3 +10,15 @@ var video = {
         {src: "https://scs.senecac.on.ca/~patrick.crawford/shared/fall-2016/int222/movie.webm", type: "video/webm"}
     ]
 };
+
+window.onload = function()
+{
+    var videoContainer = document.querySelector("#videoDivID");
+    var videoTxt = "<figure><video width=\"" + video.width + "\"height=\"" + video.height + "\"controls " + video.controls + ">";
+    for (var i = 0; i < video.source.length; i++)
+    {
+        videoTxt += "<source src=\"" + video.source[i].src + "\"type=\"" + video.source[i].type + "\">";
+    }
+    videoTxt += "Your browser does not support the video element.</video></figure>";
+    videoContainer.innerHTML = videoTxt;
+};
