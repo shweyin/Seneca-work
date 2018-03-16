@@ -74,29 +74,13 @@ namespace AMA {
 	}
 	std::istream & Date::read(std::istream& istr)
 	{
-		char dateString[11];
-		char strYear[5], strMonth[3], strDay[3];
-		int i, tempYear, tempMonth, tempDay;
-
-		istr >> dateString;
-
-		for (i = 0; i < 4; i++)
-		{
-			strYear[i] = dateString[i];
-		}
-		for (i = 5; i < 7; i++)
-		{
-			strMonth[i - 5] = dateString[i];
-		}
-		for (i = 8; i < 10; i++)
-		{
-			strDay[i - 8] = dateString[i];
-		}
-		tempYear = std::stoi(strYear);
-		tempMonth = std::stoi(strMonth);
-		tempDay = std::stoi(strDay);
+		istr.get(year, 4);
+		istr.get();
+		istr.get(month, 2);
+		istr.get();
+		istr.get(day, 2);
 		
-		if ((tempYear < min_year || tempYear > max_year) || (tempMonth < 1 || tempMonth > 12) || (tempDay < 1 || tempDay > mdays(tempMonth, tempYear)) || istr.fail())
+		if ((year < min_year || year > max_year) || (month < 1 || month > 12) || (day < 1 || day > mdays(month, year)))
 		{
 			errState = CIN_FAILED;
 		}
@@ -118,7 +102,7 @@ namespace AMA {
 		myDate.read(istr);
 		return istr;
 	}
-	std::ostream & operator<<(std::ostream& ostr, Date& myDate)
+	std::ostream & operator<<(std::ostream& ostr, const Date& myDate)
 	{
 		myDate.write(ostr);
 		return ostr;
