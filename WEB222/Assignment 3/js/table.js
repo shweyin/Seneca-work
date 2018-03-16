@@ -7,3 +7,20 @@ var users = [
     {first_name: "Timothy", last_name: "McAlpine", age: 37, email: "Timbo72469@usermail.com"},
     {first_name: "Sarah", last_name: "Connor", age: 19, email: "SarahC6320@usermail.com"}
 ];
+
+window.onload = function()
+{
+    var tableDivContainer = document.querySelector("#tableDivID");
+    var tableTxt = "<table border=1px solid>";
+    tableTxt += "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Email</th></tr>";
+    for(var i = 0; i < users.length; i++)
+    {
+        tableTxt += "<tr>" + "<td>" + users[i].first_name + "</td>" + "<td>" + users[i].last_name + "</td>" + "<td>" + users[i].age + "</td>" + "<td>" 
+        + "<a href=\"mailto:" + users[i].email + "\">" + users[i].email + "</a>"
+        + "</td>" + "</tr>";
+    }
+    tableTxt += "</table>";
+    tableDivContainer.innerHTML = tableTxt;
+};
+
+//<a href="mailto:shweyin@gmail.com">Email Me</a>
