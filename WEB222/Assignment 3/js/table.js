@@ -11,16 +11,36 @@ var users = [
 window.onload = function()
 {
     var tableDivContainer = document.querySelector("#tableDivID");
-    var tableTxt = "<table border=1px solid>";
-    tableTxt += "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Email</th></tr>";
+    var table = document.createElement("table");
+    var tr = null, td = null, txt = null;
     for(var i = 0; i < users.length; i++)
     {
-        tableTxt += "<tr>" + "<td>" + users[i].first_name + "</td>" + "<td>" + users[i].last_name + "</td>" + "<td>" + users[i].age + "</td>" + "<td>" 
-        + "<a href=\"mailto:" + users[i].email + "\">" + users[i].email + "</a>"
-        + "</td>" + "</tr>";
+        tr = createElement("tr");
+
+        td = createElement("td");
+        txt = createTextNode(users[i].first_name);
+        td.appendChild(txt);
+        tr.appendChild(td);
+
+        //td = createElement("td");
+        txt = createTextNode(users[i].last_name);
+        td.appendChild(txt);
+        tr.appendChild(td);
+
+        //td = createElement("td");
+        txt = createTextNode(users[i].age);
+        td.appendChild(txt);
+        tr.appendChild(td);
+
+        //td = createElement("td");
+        txt = createTextNode(users[i].email);
+        td.appendChild(txt);
+        tr.appendChild(td);
+
+        table.appendChild(tr);
     }
-    tableTxt += "</table>";
-    tableDivContainer.innerHTML = tableTxt;
+    table.style.border = "1px solid";
+    tableDivContainer.appendChild(table);
 };
 
 //<a href="mailto:shweyin@gmail.com">Email Me</a>
