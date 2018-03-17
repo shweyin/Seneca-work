@@ -17,6 +17,7 @@
 #define AMA_DATE_H
 #include <iostream>
 #include <string>
+#include <iomanip>
 //using namespace std;
 
 namespace AMA {

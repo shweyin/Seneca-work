@@ -88,16 +88,25 @@ namespace AMA {
 		{
 			if (year < min_year || year > max_year)
 			{
+				year = 0000;
+				month = 00;
+				day = 00;
 				comparator = 0;
 				errCode(YEAR_ERROR);
 			}
 			else if (month < 1 || month > 12)
 			{
+				year = 0000;
+				month = 00;
+				day = 00;
 				comparator = 0;
 				errCode(MON_ERROR);
 			}
 			else if (day < 1 || day > mdays(month, year))
 			{
+				year = 0000;
+				month = 00;
+				day = 00;
 				comparator = 0;
 				errCode(DAY_ERROR);
 			}
@@ -111,7 +120,7 @@ namespace AMA {
 	}
 	std::ostream & Date::write(std::ostream& ostr) const
 	{
-		ostr << year << "/" << month << "/" << day;
+		ostr << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << std::setfill('0') << day;
 		return ostr;
 	}
 	std::istream & operator>>(std::istream& istr,Date& myDate)
