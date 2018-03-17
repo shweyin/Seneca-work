@@ -35,7 +35,7 @@ namespace AMA {
 	}
 	Date::Date(int cons_year, int cons_month, int cons_day)
 	{
-		if (year < min_year || year > max_year)
+		if (cons_year < min_year || cons_year > max_year)
 		{
 			year = 0000;
 			month = 00;
@@ -43,7 +43,7 @@ namespace AMA {
 			comparator = 0;
 			errCode(YEAR_ERROR);
 		}
-		else if (month < 1 || month > 12)
+		else if (cons_month < 1 || cons_month > 12)
 		{
 			year = 0000;
 			month = 00;
@@ -74,21 +74,38 @@ namespace AMA {
 	}
 	std::istream & Date::read(std::istream& istr)
 	{
-		istr.get(year, 4);
+		istr >> year;
 		istr.get();
-		istr.get(month, 2);
+		istr >> month;
 		istr.get();
-		istr.get(day, 2);
+		istr >> day;
 		
-		if ((year < min_year || year > max_year) || (month < 1 || month > 12) || (day < 1 || day > mdays(month, year)))
+		if (istr.fail())
 		{
 			errState = CIN_FAILED;
 		}
 		else
 		{
-			year = tempYear;
-			month = tempMonth;
-			day = tempDay;
+			if (year < min_year || year > max_year)
+			{
+				comparator = 0;
+				errCode(YEAR_ERROR);
+			}
+			else if (month < 1 || month > 12)
+			{
+				comparator = 0;
+				errCode(MON_ERROR);
+			}
+			else if (day < 1 || day > mdays(month, year))
+			{
+				comparator = 0;
+				errCode(DAY_ERROR);
+			}
+			else
+			{
+				comparator = year * 372 + month * 13 + day;
+				errCode(NO_ERROR);
+			}
 		}
 		return istr;
 	}
