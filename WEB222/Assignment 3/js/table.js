@@ -11,16 +11,55 @@ var users = [
 window.onload = function()
 {
     var tableDivContainer = document.querySelector("#tableDivID");
-    var tableTxt = "<table border=1px solid>";
-    tableTxt += "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Email</th></tr>";
+    var table = document.createElement("table");
+    table.border = "1";
+    var tr = null, td = null, txt = null;
+
+    /*
+    tr = document.createElement("tr");
+    for (var key in users[1])
+    {
+        if(users[1].hasOwnProperty(key))
+        {
+            th = document.createElement("th");
+            txt = document.createTextNode(key);
+            th.appendChild(txt);
+            tr.appendChild(th);
+        }
+    }
+    table.appendChild(tr);
+    */
+    tr = document.createElement("tr");
+    txt = "<th>First Name</th><th>Last Name</th><th>Age</th><th>Email</th>";
+    tr.innerHTML = txt;
+    table.appendChild(tr);
+
     for(var i = 0; i < users.length; i++)
     {
-        tableTxt += "<tr>" + "<td>" + users[i].first_name + "</td>" + "<td>" + users[i].last_name + "</td>" + "<td>" + users[i].age + "</td>" + "<td>" 
-        + "<a href=\"mailto:" + users[i].email + "\">" + users[i].email + "</a>"
-        + "</td>" + "</tr>";
+        tr = document.createElement("tr");
+        for (key in users[i])
+        {
+            if(users[i].hasOwnProperty(key))
+            {
+                if(key == "email")
+                {
+                    td = document.createElement("td");
+                    txt = "<a href=\"mailto:" + users[i][key] + "\">" + users[i][key] + "</a>";
+                    td.innerHTML = txt;
+                    tr.appendChild(td);
+                }
+                else
+                {
+                    td = document.createElement("td");
+                    txt = document.createTextNode(users[i][key]);
+                    td.appendChild(txt);
+                    tr.appendChild(td);
+                }
+            }
+        }
+        table.appendChild(tr);
     }
-    tableTxt += "</table>";
-    tableDivContainer.innerHTML = tableTxt;
+    tableDivContainer.appendChild(table);
 };
 
 //<a href="mailto:shweyin@gmail.com">Email Me</a>
