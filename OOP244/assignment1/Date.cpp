@@ -37,25 +37,25 @@ namespace AMA {
 	{
 		if (cons_year < min_year || cons_year > max_year)
 		{
-			year = 0000;
-			month = 00;
-			day = 00;
+			year = 0;
+			month = 0;
+			day = 0;
 			comparator = 0;
 			errCode(YEAR_ERROR);
 		}
 		else if (cons_month < 1 || cons_month > 12)
 		{
-			year = 0000;
-			month = 00;
-			day = 00;
+			year = 0;
+			month = 0;
+			day = 0;
 			comparator = 0;
 			errCode(MON_ERROR);
 		}
 		else if (cons_day < 1 || cons_day > mdays(cons_month, cons_year))
 		{
-			year = 0000;
-			month = 00;
-			day = 00;
+			year = 0;
+			month = 0;
+			day = 0;
 			comparator = 0;
 			errCode(DAY_ERROR);
 		}
