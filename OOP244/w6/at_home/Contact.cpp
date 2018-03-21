@@ -10,8 +10,7 @@ namespace sict
 	Contact::Contact(const Contact& copy_contact)
 	{
 		//shallow copy
-		strcpy(name, copy_contact.name);
-		size = copy_contact.size;
+		shallowCopy(copy_contact.name, copy_contact.size);
 		//deep copy
 
 	}
@@ -33,6 +32,11 @@ namespace sict
 		strcpy(name, "");
 		size = 0;
 		numbers = nullptr;
+	}
+	void Contact::shallowCopy(const char* shal_cpy_name, int shal_cpy_size)
+	{
+		strcpy(shal_cpy_obj.name, shal_cpy_name);
+		shal_cpy_obj.size = shal_cpy_size;
 	}
 	void Contact::copyNumbers(long long* src_cpy_numbers, int cpy_size)
 	{
@@ -62,8 +66,8 @@ namespace sict
 	bool Contact::valid(long long phoneNum) const
 	{
 		return ((/*cc*/(phoneNum / 10 ^ 10) % 1000) >= 1 && 
-				(/*ac*/(phoneNum / 10 ^ 7) % 1000) > 99 && (/*ac*/(phoneNum / 10 ^ 7) % 1000) < 1000 &&
-				(/*num*/(phoneNum / 10 ^ 4) % 10 ^ 6) > 999999 && (/*num*/(phoneNum / 10 ^ 4) % 10 ^ 6) < 10000000);
+				(/*ac*/(phoneNum / 10 ^ 7) % 1000) > 99 &&
+				(/*num*/(phoneNum / 10 ^ 5) % 10 ^ 3) > 99);
 	}
 	bool Contact::isEmpty() const
 	{
@@ -89,7 +93,7 @@ namespace sict
 	{
 		if (this != &assignment_contact)
 		{
-
+			shallowCopy(assignment_contact.name, assignment_contact.size);
 		}
 	}
 	Contact& Contact::operator+=(const Contact &)

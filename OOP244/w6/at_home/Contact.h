@@ -16,6 +16,7 @@ namespace sict
 		long long *numbers;
 		void setEmpty();
 		void copyNumbers(long long*, int);
+		void shallowCopy(const char*, int);
 	public:
 		Contact();
 		Contact(const Contact&);
