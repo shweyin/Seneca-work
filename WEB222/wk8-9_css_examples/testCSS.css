@@ -1,0 +1,23 @@
+p {font-size: 60px;
+       color: yellow;
+   }
+   
+h1 {color: red; font-size: 12px;}
+h2, h3 {color: green; font-size: 200%;}   /* group selector */
+
+
+p.type1 { text-decoration:underline; }  /* class for <p> */
+ .note   { font-style: italic; text-decoration:underline; }  /* class for any selector */
+#special { letter-spacing: 0.2em; }  /* id */
+.red {color:red;} 
+.bold {font-weight: bold;}
+
+div{
+     border: 2px;
+     width: 50%;
+     margin: auto;
+   }
+   
+ol {color :green; }
+ol ul { color: red; }  /* contextual selector */
+ol ul li.under {text-decoration: underline; }

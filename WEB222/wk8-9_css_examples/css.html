@@ -1,0 +1,70 @@
+<!-- This example demos the inclusion of basic css as follows:
+  -- inline CSS, internal CSS, external CSS
+  -- demos basic CSS selectors, including
+     * HTML tag Selectors
+     * Class Selectors
+     * Id Selectors
+     * Contextual Selectors
+     * Grouping Selectors
+  -- <span> & <div>
+  --  you can test and see the effect of the interaction with all kinds of CSS
+-->
+
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <title> CSS </title>
+       <meta charset="UTF-8"/>
+
+       <link rel="stylesheet" href="testCSS.css"/>
+       <style>
+            p {font-size: 40px;
+              color: blue;
+
+              }
+       </style>
+
+   </head>
+
+   <body>
+    <h1> Heading 1 is changed by CSS </h1>
+    <h2> heading 2 with group selector CSS </h2>
+    <h3> heading 3 with group selector CSS </h3>
+     <p style="font-size: 20px; color: purple"> Paragraph showing Inline CSS </p>
+
+
+
+    <p> Paragraph follows the CSS on paragraph </p>
+
+    <p class = "type1"> Paragraph using class type1 </p>
+
+    <h4 class = "type1" > Class for paragraph does not work for Heading 4 </h4>
+
+    <p class = "note" > Paragraph using general class note </p>
+
+    <div class = "bold">
+
+    <h4 class = "note" > General class note works for all kinds of selectors </h4>
+
+    <p class= "note red"> Paragraph with two classes </p>
+
+    <p id = "special"> This is special using ID </p>
+
+    </div>
+
+    <p> testing <span class = "note"> inline </span> tag span  </p>
+
+    <ol>
+       <li> item 1
+            <ul>
+                 <li> nested ul item 1 </li>
+                 <li> nested ul item 2 </li>
+                 <li class = "under"> nested ul item 3 </li>
+            </ul>
+       </li>
+       <li> item 2</li>
+       <li class = "under"> item 3 - contextual selector applied at wrong place  </li>
+    </ol>
+   </body>
+</html>

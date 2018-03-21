@@ -1,0 +1,35 @@
+div.container { 
+        width: 80%;
+        background-color: grey;
+        margin: auto;
+      }
+
+header {
+          height: 10%;
+          font-weight: bold;
+          color: red;
+          text-align: center;
+        }
+        
+#sidebar1 {
+        width: 10%;
+        float: left;
+      }
+      
+#sidebar2 {
+              width: 80%;
+              float: left;
+             }
+             
+#sidebar3 { width: 10%;
+            float: left;
+           }
+footer {
+         clear :both;
+         background-color: #aaa;
+         text-align: center;
+       }
+       
+aside, section.main {
+                 margin:50px, 10px;
+                    }

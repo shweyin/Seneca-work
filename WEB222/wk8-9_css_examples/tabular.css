@@ -1,0 +1,35 @@
+div.container { 
+        width: 80%;
+        background-color: grey;
+        margin: auto;
+        display: table;
+      }
+
+header {
+          height: 10%;
+          font-weight: bold;
+          color: red;
+          text-align: center;
+        }
+        
+aside {
+        width: 10%;
+        //float: left;
+       display: table-cell;
+      }
+      
+section.main{
+              width: 80%;
+          //    float: left;
+             display: table-cell;
+             }
+             
+footer {
+        // clear :both;
+         display: block;
+         background-color: #aaa;
+       }
+       
+aside, section.main {
+                 margin:50px, 10px;
+                    }

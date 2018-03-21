@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title> CSS Table </title>
+   <meta charset="utf-8">
+   <style>
+		table {
+			width: 50%;
+            margin: auto;
+			border: dotted;
+			background-color: yellow;
+			/* border-collapse:collapse;*/
+		}
+		
+		td { 
+			border: 1px solid blue;
+		}
+		
+		#table2 td {
+			border: 10px inset purple;
+			padding:10px 20px;
+			background-color: green;
+			height: 50px;
+			width: 400px;
+		}
+   </style>
+</head>
+
+<body>
+   <h3>Example of CSS Table Styling:</h3>
+   <table>
+      <tbody><tr>
+         <td>First row, first cell.</td>
+         <td rowspan="2">First row, second cell spanned.</td>
+      </tr>
+      <tr>
+         <td>Second row, first cell.</td>
+      </tr>
+      <tr>
+         <td>Third row, first cell.</td>
+         <td>Third row, second cell.</td>
+      </tr>
+   </tbody></table>
+   <hr>
+   <table id="table2">
+      <tbody><tr>
+         <td>First row, first cell.</td>
+         <td rowspan="2">First row, second cell spanned.</td>
+      </tr>
+      <tr>
+         <td>Second row, first cell.</td>
+      </tr>
+      <tr>
+         <td>Third row, first cell.</td>
+         <td>Third row, second cell.</td>
+      </tr>
+   </tbody></table>
+
+
+</body></html>

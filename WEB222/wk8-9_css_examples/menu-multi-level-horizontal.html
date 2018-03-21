@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>Menu</title>
+   <style>
+		.container {
+            width:  960px;
+            margin: auto;
+        }   
+		
+		nav{
+			background-color: #444;
+		}
+		
+        nav ul {
+			list-style-type: none;
+			padding-left:20px;
+			margin:0px;
+        }  
+        nav ul li {
+			display:inline-block; /*  horizontal  */
+			background-color: #444;
+			position:relative;
+        }
+		
+		nav ul li ul {
+			list-style-type: none;
+			padding:0px;
+			margin:0px;
+			display:none;
+			visibility: hidden; /* invisible initially */
+			transition: opacity 0.2s;
+			position:absolute;
+			width: 150px;
+			background-color: #444;
+		}
+		
+		nav ul li:hover ul {
+			display: block;
+			padding: 0;
+			opacity: 1;
+			visibility: visible; /* submenu is visible when mouse over the menu item */
+		}
+		
+		nav ul li ul li{
+			width:100%;
+		}
+		
+		nav ul li a{
+			background-color: #444;
+			color: #eee;
+			text-decoration: none;
+			padding:0 12px;	
+			font-weight:bold;
+			text-transform: uppercase;
+			font-size:13px;
+			display:block;
+			padding: 12px 16px;
+		}
+		
+		nav ul li a:hover{
+			background-color: #222;
+			color: #fff;
+		}
+		
+        footer section p {
+			text-align:center;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+      <header>
+        <h1>Summer 2017  Semester - Seneca @ York Campus </h1>
+        <nav>
+		  <ul>	  
+			<li><a href="#top">Home</a></li>
+			<li><a href="#timetable">Timetable</a></li>
+			<li><a href="#standards">Standards</a></li>
+			<li><a href="#">courses</a>
+              <ul>
+                <li><a href="#ibc233">IBC233</a></li>
+				<li><a href="#int222">INT222</a></li>
+				<li><a href="#bti222">BTI220</a></li>
+              </ul>
+            </li>
+		  </ul>
+        </nav>
+      </header>
+	  <div class="main">
+		  <article>
+		  </article>
+		  <article>
+		  </article>
+	  </div>
+      <footer>
+		<section>
+		</section>
+      </footer>
+    </div>
+
+
+</body></html>
