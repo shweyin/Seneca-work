@@ -3,12 +3,6 @@
 #include "Contact.h"
 namespace sict
 {
-	void Contact::setEmpty()
-	{
-		strcpy(name, "");
-		size = 0;
-		numbers = nullptr;
-	}
 	Contact::Contact()
 	{
 		setEmpty();
@@ -55,13 +49,19 @@ namespace sict
 	{
 		delete[] numbers;
 	}
+	void Contact::setEmpty()
+	{
+		strcpy(name, "");
+		size = 0;
+		numbers = nullptr;
+	}
 	bool Contact::valid(long long* phoneNum) const
 	{
 		int cc, ac, num;
 
-		cc = (*phoneNum / 10000000000) % 1000;
-		ac = (*phoneNum / 10000000) % 1000;
-		num = (*phoneNum / 10000) % 1000000;
+		cc = (*phoneNum / 10^10) % 1000;
+		ac = (*phoneNum / 10^7) % 1000;
+		num = (*phoneNum / 10^4) % 10^6;
 
 		return (cc >= 1 && ac > 99 && ac < 1000 && num > 999999 && num < 10000000) ? true : false;
 	}
