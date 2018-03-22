@@ -1,11 +1,9 @@
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS
 // Student: Shweyin Than, 115675175, shweyin@gmail.com
 
 #include <iostream>
 #include <cstring>
-#include <string.h>
-using namespace std;
+#include <iomanip>
 
 namespace sict
 {
@@ -13,19 +11,21 @@ namespace sict
 	{
 		char name[20];
 		int size;
-		long long *numbers;
+		long long *phone_numbers;
+		long long cc(long long);
+		long long ac(long long);
+		long long num1(long long);
+		long long num2(long long);
 		void setEmpty();
-		void copyNumbers(long long*, int);
-		void shallowCopy(const char*, int);
+		bool isValid(long long);
 	public:
 		Contact();
 		Contact(const Contact&);
 		Contact(const char*, long long*, int);
 		~Contact();
-		bool valid(long long) const;
 		bool isEmpty() const;
-		void display() const;
+		void display();
 		Contact& operator=(const Contact&);
-		Contact& operator+=(const Contact&);
+		Contact& operator+=(long long);
 	};
 }

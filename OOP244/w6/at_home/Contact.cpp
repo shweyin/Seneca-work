@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 // Student: Shweyin Than, 115675175, shweyin@gmail.com
 
 #include "Contact.h"
@@ -7,97 +8,150 @@ namespace sict
 	{
 		setEmpty();
 	}
-	Contact::Contact(const Contact& copy_contact)
+	Contact::Contact(const Contact& cpycon_contact)
 	{
-		//shallow copy
-		shallowCopy(copy_contact.name, copy_contact.size);
-		//deep copy
-
+		*this = cpycon_contact;
 	}
-	Contact::Contact(const char* con_name, long long* con_numbers, int con_size)
+	long long Contact::cc(long long phoneNum)
 	{
-		setEmpty();
-		if (con_name && strcmp(con_name, "") != 0)
+		return (phoneNum / 10000000000) % 1000;
+	}
+	long long Contact::ac(long long phoneNum)
+	{
+		return (phoneNum / 10000000) % 1000;
+	}
+	long long Contact::num1(long long phoneNum)
+	{
+		return (phoneNum / 10000) % 1000;
+	}
+	long long Contact::num2(long long phoneNum)
+	{
+		return phoneNum % 10000;
+	}
+	void Contact::setEmpty()
+	{
+		name[0] = '\0';
+		size = 0;
+		phone_numbers = nullptr;
+	}
+	bool Contact::isValid(long long phoneNum)
+	{
+		long long countryCode = cc(phoneNum);
+		long long areaCode = ac(phoneNum);
+		long long numCode = num1(phoneNum);
+
+		return ((countryCode >= 1 && countryCode < 100) && areaCode > 99 && numCode > 99);
+	}
+	Contact::Contact(const char * cons_name, long long *cons_numbers, int cons_size)
+	{
+		Contact::setEmpty();
+
+		if (cons_name)
 		{
-			strcpy(name, con_name);
-			this->copyNumbers(con_numbers, con_size);
+			std::strncpy(name, cons_name, 20);
+			if (cons_size > 0 && cons_numbers)
+			{
+				int i = 0, valids = 0;
+				for (i = 0; i < cons_size; i++)
+				{
+					if (isValid(cons_numbers[i]))
+					{
+						valids++;
+					}
+				}
+				phone_numbers = new long long[valids];
+				size = valids;
+				int j = 0;
+				for (i = 0; i < cons_size; i++)
+				{
+					if (isValid(cons_numbers[i]))
+					{
+						phone_numbers[j] = cons_numbers[i];
+						j++;
+					}
+				}
+			}
 		}
 	}
 	Contact::~Contact()
 	{
-		delete[] numbers;
-	}
-	void Contact::setEmpty()
-	{
-		strcpy(name, "");
-		size = 0;
-		numbers = nullptr;
-	}
-	void Contact::shallowCopy(const char* shal_cpy_name, int shal_cpy_size)
-	{
-		strcpy(shal_cpy_obj.name, shal_cpy_name);
-		shal_cpy_obj.size = shal_cpy_size;
-	}
-	void Contact::copyNumbers(long long* src_cpy_numbers, int cpy_size)
-	{
-		if (src_cpy_numbers && cpy_size != 0)
-		{
-			int i = 0, j = 0;
-			//counts the number of valid phone numbers
-			for (i = 0; i < cpy_size; i++)
-			{
-				if (valid(src_cpy_numbers[i]))
-				{
-					size++;
-				}
-			}
-			//inserts valid numbers into members
-			numbers = new long long[size];
-			for (i = 0; i < cpy_size; i++)
-			{
-				if (valid(src_cpy_numbers[i]))
-				{
-					numbers[j] = src_cpy_numbers[i];
-					j++;
-				}
-			}
-		}
-	}
-	bool Contact::valid(long long phoneNum) const
-	{
-		return ((/*cc*/(phoneNum / 10 ^ 10) % 1000) >= 1 && 
-				(/*ac*/(phoneNum / 10 ^ 7) % 1000) > 99 &&
-				(/*num*/(phoneNum / 10 ^ 5) % 10 ^ 3) > 99);
+		delete[] phone_numbers;
 	}
 	bool Contact::isEmpty() const
 	{
-		return ((!name || strcmp(name, "") == 0) && !numbers && size == 0);
+		return (std::strcmp(name, "") == 0 || name[0] == '\0') && size == 0 && !phone_numbers;
 	}
-	void Contact::display() const
+	void Contact::display()
 	{
 		if (isEmpty())
 		{
-			cout << "Empty!" << endl;
+			std::cout << "Empty contact!" << std::endl;
 		}
 		else
 		{
-			cout << name << endl;
-			int i;
-			for (i = 0; i < size; i++)
+			std::cout << name << std::endl;
+
+			if (phone_numbers)
 			{
-				cout << numbers[i];
+				int i;
+
+				for (i = 0; i < size; i++)
+				{
+					if (isValid(phone_numbers[i]))
+					{
+						std::cout << "(+" << cc(phone_numbers[i]) << ") " << ac(phone_numbers[i]) << " " << num1(phone_numbers[i]) << "-" << std::setfill('0') << std::setw(4)
+							<< num2(phone_numbers[i]) << std::endl;
+					}
+				}
 			}
 		}
 	}
 	Contact& Contact::operator=(const Contact& assignment_contact)
 	{
+		Contact temp;
 		if (this != &assignment_contact)
 		{
-			shallowCopy(assignment_contact.name, assignment_contact.size);
+			int i;
+			strcpy(temp.name, assignment_contact.name);
+			temp.size = assignment_contact.size;
+			temp.phone_numbers = new long long[temp.size];
+			for (i = 0; i < temp.size; i++)
+			{
+				temp.phone_numbers[i] = assignment_contact.phone_numbers[i];
+			}
 		}
+		return temp;
 	}
-	Contact& Contact::operator+=(const Contact &)
+	Contact& Contact::operator+=(long long mylonglong)
 	{
-		// TODO: insert return statement here
+		if (isValid(mylonglong))
+		{
+			int i;
+			if (phone_numbers)
+			{
+				long long* temp;
+				temp = new long long[size];
+				for (i = 0; i < size; i++)
+				{
+					temp[i] = phone_numbers[i];
+				}
+				delete[] phone_numbers;
+
+				size += 1;
+				phone_numbers = new long long[size];
+				for (i = 0; i < size; i++)
+				{
+					phone_numbers[i] = temp[i];
+				}
+				phone_numbers[size - 1] = mylonglong;
+				delete[] temp;
+			}
+			else
+			{
+				phone_numbers = new long long[size + 1];
+				phone_numbers[i] = mylonglong;
+			}
+		}
+		return *this;
 	}
 }
