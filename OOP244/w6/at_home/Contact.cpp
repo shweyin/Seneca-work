@@ -79,7 +79,7 @@ namespace sict
 	}
 	bool Contact::isEmpty() const
 	{
-		return (std::strcmp(name, "") == 0 || name[0] == '\0') || size == 0 && !phone_numbers;
+		return (std::strcmp(name, "") == 0 || name[0] == '\0');// || (size == 0 && !phone_numbers);
 	}
 	void Contact::display()
 	{
