@@ -15,7 +15,7 @@ namespace AMA
 	}
 	ErrorState::~ErrorState()
 	{
-		error_msg_delete();
+		delete[] error_msg;
 	}
 	void ErrorState::clear()
 	{
@@ -49,7 +49,7 @@ namespace AMA
 	{
 		if (!ErrorState::isClear())
 		{
-			ostr << error_msg << std::endl;
+			ostr << error_msg;
 		}
 		return ostr;
 	}
@@ -57,6 +57,7 @@ namespace AMA
 	std::ostream& operator<<(std::ostream& ostr, const ErrorState& ostr_ErrorState)
 	{
 		ostr_ErrorState.write(ostr);
+		//ostr << ostr_ErrorState.message() << std::endl;
 		return ostr;
 	}
 }
