@@ -79,7 +79,7 @@ namespace sict
 	}
 	bool Contact::isEmpty() const
 	{
-		return (std::strcmp(name, "") == 0 || name[0] == '\0') && size == 0 && !phone_numbers;
+		return (std::strcmp(name, "") == 0 || name[0] == '\0') || size == 0 && !phone_numbers;
 	}
 	void Contact::display()
 	{
@@ -108,19 +108,22 @@ namespace sict
 	}
 	Contact& Contact::operator=(const Contact& assignment_contact)
 	{
-		Contact temp;
 		if (this != &assignment_contact)
 		{
 			int i;
-			strcpy(temp.name, assignment_contact.name);
-			temp.size = assignment_contact.size;
-			temp.phone_numbers = new long long[temp.size];
-			for (i = 0; i < temp.size; i++)
+			strcpy(name, assignment_contact.name);
+			size = assignment_contact.size;
+			if (phone_numbers)
 			{
-				temp.phone_numbers[i] = assignment_contact.phone_numbers[i];
+				delete[] phone_numbers;
+			}
+			phone_numbers = new long long[size];
+			for (i = 0; i < size; i++)
+			{
+				phone_numbers[i] = assignment_contact.phone_numbers[i];
 			}
 		}
-		return temp;
+		return *this;
 	}
 	Contact& Contact::operator+=(long long mylonglong)
 	{
@@ -148,8 +151,9 @@ namespace sict
 			}
 			else
 			{
-				phone_numbers = new long long[size + 1];
-				phone_numbers[i] = mylonglong;
+				size += 1;
+				phone_numbers = new long long[size];
+				phone_numbers[size - 1] = mylonglong;
 			}
 		}
 		return *this;
