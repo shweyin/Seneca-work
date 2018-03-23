@@ -1,0 +1,11 @@
+.center
+{
+    width: 80%;
+    border: 1px solid black;
+    color: blue;
+    margin: auto;
+}
+ul.innerlist
+{
+    font-style: italic;
+}
