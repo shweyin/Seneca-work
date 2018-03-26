@@ -59,7 +59,8 @@ namespace sict
 	}
 	const Hero& operator*(const Hero& lhsHero, const Hero& rhsHero)
 	{
-		Hero temp_lhsHero, temp_rhsHero;
+		Hero temp_lhsHero = lhsHero;
+		Hero temp_rhsHero = rhsHero;
 		Hero temp_winner;
 		int i = 0;
 		while (temp_lhsHero.isAlive() && temp_rhsHero.isAlive() && i < max_rounds)
