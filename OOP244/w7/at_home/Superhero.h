@@ -14,9 +14,9 @@ namespace sict
 		void setEmpty();
 		bool valid(const char*, int, int, int, int);
 		bool isEmpty();
-		int attackStrength() const;
-		int defenseStrength() const;
 	public:
+		int attackStrength() const;
+		int defend() const;
 		SuperHero();
 		SuperHero(const char*, int, int, int, int);
 	};

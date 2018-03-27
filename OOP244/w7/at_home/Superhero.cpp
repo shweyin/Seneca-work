@@ -39,12 +39,27 @@ namespace sict {
 		int attack1 = Hero::attackStrength();
 		return attack1 + attackBonus;
 	}
-	int SuperHero::defenseStrength() const
+	int SuperHero::defend() const
 	{
 		return defense;
 	}
-	const SuperHero operator*(const SuperHero &, const SuperHero &)
+	const SuperHero operator*(const SuperHero& lhsSuperHero, const SuperHero& rhsSuperHero)
 	{
-		return SuperHero();
+		SuperHero temp_lhsSuperHero = lhsSuperHero;
+		SuperHero temp_rhsSuperHero = rhsSuperHero;
+		const SuperHero *temp_winner = nullptr;
+		int i = 0;
+		while (temp_lhsSuperHero.isAlive() && temp_rhsSuperHero.isAlive() && i < max_rounds)
+		{
+			temp_lhsSuperHero -= rhsSuperHero.attackStrength() - lhsSuperHero.defend();
+			temp_rhsSuperHero -= lhsSuperHero.attackStrength() - rhsSuperHero.defend();
+			i++;
+		}
+
+		temp_winner = temp_rhsSuperHero.isAlive() ? &rhsSuperHero : &lhsSuperHero;
+
+		std::cout << "Super Fight! " << lhsSuperHero << " vs " << rhsSuperHero << " : Winner is " << *temp_winner << " in " << i << " rounds." << std::endl;
+
+		return *temp_winner;
 	}
 }
