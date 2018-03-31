@@ -15,7 +15,7 @@ body {
 nav {
     height: 40px;
     background: #343434;
-    border: #000 solid 1px;
+    border: #765527 solid 1px;
     margin-bottom:20px;
 }
 
@@ -68,7 +68,7 @@ footer {
     height: 30px;
     width: 100%;
     background: #343434;
-    border: #000 solid 1px;    
+    border: #765527 solid 1px;
     color: #eee;
     text-align: left;
     font-size: 95%;

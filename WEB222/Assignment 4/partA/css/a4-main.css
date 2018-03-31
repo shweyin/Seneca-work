@@ -9,6 +9,55 @@
 * electronically from any other source (including web sites) or distributed to 
 * other students. 
 * 
-* Name: ______________________ Student ID: ______________ Date: ________________ 
+* Name: Shweyin Than Student ID: 115675175 Date: 4/1/2018 
 * 
 ********************************************************************************/
+
+body 
+{
+    color: #A67632;
+}
+nav
+{
+    background-color: #765527;
+}
+footer
+{
+    background-color: #765527;
+}
+header
+{
+    font-weight: bold;
+    text-shadow: 2px 2px 8px #765527;
+}
+h1.app-title
+{
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    text-decoration: underline;
+    font-style: italic;
+}
+div.main-table-container
+{
+    max-height: 500px;
+    overflow: auto;
+    border: #765527 solid 1px;
+}
+table.main-table-top th
+{
+    color: white;
+    background-color: #765527;
+    font-style: italic;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+table.main-table td
+{
+    text-align: justify;
+    background-color: #ecd9c6;
+    border: #663500 solid 1px;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+table.main-table p span
+{
+    font-style: italic;
+    font-weight: bold;
+}
