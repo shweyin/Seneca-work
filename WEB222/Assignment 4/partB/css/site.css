@@ -1,0 +1,38 @@
+.main-container
+{
+    max-width: 960 px;
+    margin:auto;
+}
+.main-container nav
+{
+    width: 30%;
+    float: left;
+}
+.main-container.main
+{
+    width: 70%;
+    float: right;
+}
+.main-container header
+{
+    padding: 10px;
+    background-color: #eeeeee;
+    border-bottom: #cccccc solid 1px;
+    margin-bottom: 30px;
+}
+.main-container header h1
+{
+    width: 60%;
+    font-size: 24px;
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+}
+.main-container footer
+{
+    clear: both;
+    padding: 20px 10px;
+    background-color: #eeeeee;
+    border-top: #cccccc solid 1px;
+    font-size: 13px;
+}
