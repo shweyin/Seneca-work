@@ -2,8 +2,18 @@
 
 namespace AMA
 {
-	void Product::name(const char *)
+	void Product::name(const char* param_product_name)
 	{
+		if (param_product_name)
+		{
+			int temp = strlen(param_product_name);
+			product_name = new char[temp];
+			strncpy(product_name, param_product_name, max_name_chars);
+		}
+		else if (!param_product_name)
+		{
+			delete[] product_name;
+		}
 	}
 
 	const char* Product::name() const
@@ -18,12 +28,12 @@ namespace AMA
 
 	const char* Product::sku() const
 	{
-		return sku;
+		return sku_name;
 	}
 
 	const char* Product::unit() const
 	{
-		return unit;
+		return unit_name;
 	}
 
 	bool Product::taxed()
@@ -59,24 +69,45 @@ namespace AMA
 	Product::Product(char cons_char = 'N')
 	{
 		type = cons_char;
-		strcpy(sku, "");
+		strcpy(sku_name, "");
+		strcpy(unit_name, "");
+		product_name = nullptr;
+		product_quantity = 0;
+		quantity_needed = 0;
+		unit_price = 0;
+		taxable = false;
 	}
 
-	Product::Product(const char *, const char *, const char *, int, bool, double, int)
+	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, int cons_product_quantity = 0, bool cons_taxable = true, double cons_unit_price, int cons_quantity_needed)
 	{
+		type = 'N';
+		name(cons_sku_name);
+		strcpy(unit_name, cons_unit_name);
+		product_quantity = cons_product_quantity;
+		taxable = cons_taxable;
+		unit_price = cons_unit_price;
+		quantity_needed = cons_quantity_needed;
 	}
 
-	Product::Product(const Product &)
+	Product::Product(const Product& copy_target)
 	{
+		*this = copy_target;
 	}
 
-	Product& Product::operator=(const Product &)
+	Product& Product::operator=(const Product& copy_target)
 	{
-		// TODO: insert return statement here
+		type = copy_target.type;
+		name(copy_target.product_name);
+		strcpy(unit_name, copy_target.unit_name);
+		product_quantity = copy_target.product_quantity;
+		taxable = copy_target.taxable;
+		unit_price = copy_target.unit_price;
+		quantity_needed = copy_target.quantity_needed;
 	}
 
 	Product::~Product()
 	{
+		delete[] product_name;
 	}
 
 	std::fstream& Product::store(std::fstream &, bool newLine) const
@@ -99,63 +130,75 @@ namespace AMA
 		// TODO: insert return statement here
 	}
 
-	bool Product::operator==(const char *)
+	bool Product::operator==(const char* compared_sku_name)
 	{
-		return false;
+		return (strcmp(sku_name, compared_sku_name) == 0);
 	}
 
 	double Product::total_cost() const
 	{
-		return 0.0;
+		return taxable ? (unit_price * product_quantity) * tax_rate : unit_price * product_quantity;
 	}
 
-	void Product::quantity(int)
+	void Product::quantity(int new_quantity)
 	{
+		product_quantity = new_quantity;
 	}
 
 	bool Product::isEmpty()
 	{
-		return false;
+		return (
+			strcpy(sku_name, "") == 0 &&
+			strcpy(unit_name, "") == 0 &&
+			product_name == nullptr &&
+			product_quantity == 0 &&
+			quantity_needed == 0 &&
+			unit_price == 0 &&
+			taxable == false);
 	}
 
 	int Product::qtyNeeded()
 	{
-		return 0;
+		return quantity_needed;
 	}
 
 	int Product::quantity() const
 	{
-		return 0;
+		return product_quantity;
 	}
 
-	bool Product::operator>(const char *) const
+	bool Product::operator>(const char* comparison_string) const
 	{
-		return false;
+		return sku_name > comparison_string;
 	}
 
-	bool Product::operator>(const Product &) const
+	bool Product::operator>(const Product& comparison_name) const
 	{
-		return false;
+		return product_name > comparison_name.product_name;
 	}
 
-	int Product::operator+=(int)
+	int Product::operator+=(int adding_quantity)
 	{
-		return 0;
+		if (adding_quantity > 0)
+		{
+			product_quantity += adding_quantity;
+		}
+		return product_quantity;
 	}
 
-	std::ostream& operator<<(std::ostream &, const Product &)
+	std::ostream& operator<<(std::ostream& ostr, const Product& )
 	{
 		// TODO: insert return statement here
 	}
 
-	std::istream& operator>>(std::istream &, Product &)
+	std::istream& operator>>(std::istream& istr, Product& )
 	{
 		// TODO: insert return statement here
 	}
 
-	double operator+=(double &, const Product &)
+	double operator+=(double& initial_cost, const Product& myProduct)
 	{
-		return 0.0;
+		return initial_cost + myProduct.total_cost;
 	}
 
 }

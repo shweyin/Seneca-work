@@ -6,17 +6,17 @@
 
 namespace AMA
 {
-	const int max_sku_chars = 8;
-	const int max_unit_chars = 11;
-	const int max_name_chars = 76;
+	const int max_sku_chars = 7;
+	const int max_unit_chars = 10;
+	const int max_name_chars = 75;
 	const double tax_rate = 0.13;
 
 	class Product
 	{
 		char type;
-		char sku[max_sku_chars];
-		char unit[max_unit_chars];
-		char product_name[max_name_chars];
+		char sku_name[max_sku_chars];
+		char unit_name[max_unit_chars];
+		char* product_name;
 		int product_quantity;
 		int quantity_needed;
 		double unit_price;
