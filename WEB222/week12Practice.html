@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Shweyin's In Class Exercise</title>
+        <link rel="stylesheet" href="proskills.css"/>
+    </head>
+    <body>
+        <h2>My Form</h2>
+        <form name="myForm" method="post" action="https://httpbin.org/post">
+            First Name: <input type="text" name="fName" value="Input your First Name" size="10" maxlength="30"/>
+            <br>
+            Last Name: <input type="password" name="lName" placeholder="Input your Password" required title="mypassword"/>
+            <br>
+            Course:<input type="text" name="form3" value="web222" readonly/>
+            <br>
+            <Label>Gender</Label>
+            <input type="radio" name="gender" value="F" id="f" title="Female">
+            <label for="f">Female</label>
+            <input type="radio" name="gender" value="M" title="Male" id="m" checked>
+            <label for="m">Male</label>
+            <br>Hobby:<br>
+            <label for="check1">Travelling</label><input type="checkbox" name="check" id="check1" checked>
+            <br>
+            <label for="check2">Running</label><input type="checkbox" name="check2" id="check2">
+            <br>
+            age: <br>
+            <input type="number" name="age" min="0" max="999">
+            <br>
+            Dropdown: <br>
+            <select name="myDropdown" multiple>
+                <option value=1>option 1</option>
+                <option selected>option 2</option>
+                <option>option 3</option>
+            </select>
+            <br>
+            Upload a file: <br><input type="file" name="userfile" multiple/>
+            <br>
+            <label>Random Text Here:</label> <br>
+            <textarea name="mytextarea" cols=15 rows=4 placeholder="add a comment..."></textarea>
+            <input type="hidden" name="version" value="1.000">
+            <input type="submit" value="Submit"/>
+            <input type="reset" value="Clear"/>
+            <br>
+        </form>
+    </body>
+</html>
