@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
 #include <iomanip>
@@ -28,7 +29,7 @@ namespace AMA
 		const char* name() const;
 		const char* sku() const;
 		const char* unit() const;
-		bool taxed();
+		bool taxed() const;
 		double price() const;
 		double cost() const;
 		void message(const char*);
@@ -46,13 +47,14 @@ namespace AMA
 		bool operator==(const char*);
 		double total_cost() const;
 		void quantity(int);
-		bool isEmpty();
-		int qtyNeeded();
+		bool isEmpty() const;
+		int qtyNeeded() const;
 		int quantity() const;
 		bool operator>(const char*) const;
 		bool operator>(const Product&) const;
 		int operator+=(int);
 	};
+	bool YorN();
 	std::ostream& operator<<(std::ostream&, const Product&);
 	std::istream& operator>>(std::istream&, Product&);
 	double operator+=(double&, const Product&);

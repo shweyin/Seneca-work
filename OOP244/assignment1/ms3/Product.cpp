@@ -36,7 +36,7 @@ namespace AMA
 		return unit_name;
 	}
 
-	bool Product::taxed()
+	bool Product::taxed() const
 	{
 		return taxable;
 	}
@@ -78,7 +78,7 @@ namespace AMA
 		taxable = false;
 	}
 
-	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, int cons_product_quantity = 0, bool cons_taxable = true, double cons_unit_price, int cons_quantity_needed)
+	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, int cons_product_quantity = 0, bool cons_taxable = true, double cons_unit_price = 0, int cons_quantity_needed = 0)
 	{
 		type = 'N';
 		name(cons_sku_name);
@@ -112,12 +112,34 @@ namespace AMA
 
 	std::fstream& Product::store(std::fstream& file, bool newLine = true) const
 	{
-		// TODO: insert return statement here
+		file.open("myFile" , std::ios::out | std::ios::app);
+		file << sku << ","
+			<< product_name << ","
+			<< cost() << ","
+			<< product_quantity << ","
+			<< unit_name << ","
+			<< quantity_needed;
+		if (newLine)
+		{
+			file << std::endl;
+		}
+		return file;
 	}
 
-	std::fstream& Product::load(std::fstream&)
+	std::fstream& Product::load(std::fstream& file)
 	{
-		// TODO: insert return statement here
+		Product temp;
+		file.open("myFile", std::ios::in);
+		file >> temp.sku_name;
+		file >> temp.product_name;
+		file >> temp.unit_name;
+		file >> temp.taxable;
+		file >> temp.unit_price;
+		file >> temp.product_quantity;
+		file >> temp.quantity_needed;
+		file.clear();
+		file.close();
+		return file;
 	}
 
 	std::ostream& Product::write(std::ostream& ostr, bool linear) const
@@ -148,8 +170,39 @@ namespace AMA
 
 	std::istream& Product::read(std::istream& istr)
 	{
-		//TODO this whole goddam function
+		bool good = true;
+		Product temp;
+		std::cout << "Sku: ";
+		istr >> temp.sku_name;
+		std::cout << "Name (no spaces): ";
+		istr >> temp.product_name;
+		std::cout << "Unit: ";
+		istr >> temp.unit_name;
+		std::cout << "Taxed? (y/n)";
+		temp.taxable = YorN();
+		std::cout << "Price: ";
+		istr >> temp.unit_price;
+		std::cout << "Quantity on hand: ";
+		istr >> temp.product_quantity;
+		std::cout << "Quantity needed: ";
+		istr >> temp.quantity_needed;
+		if (good)
+		{
+			*this = temp;
+		}
 		return istr;
+	}
+	bool YorN()
+	{
+		char temp;
+		bool yes = false;
+		std::cin >> temp;
+		if (temp == 'y' || temp == 'Y')
+		{
+			yes = true;
+		}
+		return yes;
+
 	}
 
 	bool Product::operator==(const char* compared_sku_name)
@@ -167,11 +220,11 @@ namespace AMA
 		product_quantity = new_quantity;
 	}
 
-	bool Product::isEmpty()
+	bool Product::isEmpty() const
 	{
 		return (
-			strcpy(sku_name, "") == 0 &&
-			strcpy(unit_name, "") == 0 &&
+			strcmp(sku_name, "") == 0 &&
+			strcmp(unit_name, "") == 0 &&
 			product_name == nullptr &&
 			product_quantity == 0 &&
 			quantity_needed == 0 &&
@@ -179,7 +232,7 @@ namespace AMA
 			taxable == false);
 	}
 
-	int Product::qtyNeeded()
+	int Product::qtyNeeded() const
 	{
 		return quantity_needed;
 	}
@@ -222,7 +275,7 @@ namespace AMA
 
 	double operator+=(double& initial_cost, const Product& myProduct)
 	{
-		return initial_cost + myProduct.total_cost;
+		return initial_cost + myProduct.total_cost();
 	}
 
 }
