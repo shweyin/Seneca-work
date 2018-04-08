@@ -7,8 +7,7 @@
 // This file implements the application
 ///////////////////////////////////////////////////
 
-#include <iostream>
-#include <fstream>
+
 #include "Data.h"
 
 using namespace std;

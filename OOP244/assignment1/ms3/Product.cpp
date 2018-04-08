@@ -8,7 +8,7 @@ namespace AMA
 		{
 			int temp = strlen(param_product_name);
 			product_name = new char[temp];
-			strncpy(product_name, param_product_name, max_name_chars);
+			strncpy(product_name, param_product_name, max_name_length);
 		}
 		else if (!param_product_name)
 		{
