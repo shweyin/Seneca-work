@@ -2,20 +2,21 @@
 #include <iostream>
 #include <cstring>
 #include <iomanip>
+#include <fstream>
 #include "ErrorState.h"
 
 namespace AMA
 {
-	const int max_sku_chars = 7;
-	const int max_unit_chars = 10;
-	const int max_name_chars = 75;
+	const int max_sku_length = 7;
+	const int max_unit_length = 10;
+	const int max_name_length = 75;
 	const double tax_rate = 0.13;
 
 	class Product
 	{
 		char type;
-		char sku_name[max_sku_chars];
-		char unit_name[max_unit_chars];
+		char sku_name[max_sku_length];
+		char unit_name[max_unit_length];
 		char* product_name;
 		int product_quantity;
 		int quantity_needed;

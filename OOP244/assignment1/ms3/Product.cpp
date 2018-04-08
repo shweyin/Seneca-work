@@ -110,24 +110,46 @@ namespace AMA
 		delete[] product_name;
 	}
 
-	std::fstream& Product::store(std::fstream &, bool newLine) const
+	std::fstream& Product::store(std::fstream& file, bool newLine = true) const
 	{
 		// TODO: insert return statement here
 	}
 
-	std::fstream& Product::load(std::fstream &)
+	std::fstream& Product::load(std::fstream&)
 	{
 		// TODO: insert return statement here
 	}
 
-	std::ostream& Product::write(std::ostream &, bool) const
+	std::ostream& Product::write(std::ostream& ostr, bool linear) const
 	{
-		// TODO: insert return statement here
+		if (linear)
+		{
+			std::cout << std::setw(max_sku_length) << sku << "|"
+				<< std::setw(20) << product_name << "|"
+				<< std::setw(7) << cost() << "|"
+				<< std::setw(4) << product_quantity << "|"
+				<< std::setw(10) << unit_name << "|"
+				<< std::setw(4) << quantity_needed;
+		}
+		else
+		{
+			std::cout
+				<< "Sku: " << sku << std::endl
+				<< "Name (no spaces): " << product_name << std::endl
+				<< "Price: " << unit_price << std::endl;
+			if (taxable) { std::cout << "Price after tax: " << cost() << std::endl; }
+			else { std::cout << "N/A" << std::endl; }
+			std::cout
+				<< "Quantity on hand: " << product_quantity << std::endl
+				<< "Quantity needed: " << quantity_needed << std::endl;
+		}
+		return ostr;
 	}
 
-	std::istream& Product::read(std::istream &)
+	std::istream& Product::read(std::istream& istr)
 	{
-		// TODO: insert return statement here
+		//TODO this whole goddam function
+		return istr;
 	}
 
 	bool Product::operator==(const char* compared_sku_name)
@@ -186,14 +208,16 @@ namespace AMA
 		return product_quantity;
 	}
 
-	std::ostream& operator<<(std::ostream& ostr, const Product& )
+	std::ostream& operator<<(std::ostream& ostr, const Product& outputProduct)
 	{
-		// TODO: insert return statement here
+		outputProduct.write(ostr, true);
+		return ostr;
 	}
 
-	std::istream& operator>>(std::istream& istr, Product& )
+	std::istream& operator>>(std::istream& istr, Product& inputProduct)
 	{
-		// TODO: insert return statement here
+		inputProduct.read(istr);
+		return istr;
 	}
 
 	double operator+=(double& initial_cost, const Product& myProduct)
