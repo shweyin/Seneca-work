@@ -36,7 +36,8 @@ namespace AMA
 		bool isClear() const;
 	public:
 		Product(char);
-		Product(const char*, const char*, const char*, int, bool, double, int);
+		Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name,
+			int cons_product_quantity = 0, bool cons_taxable = true, double cons_unit_price = 0, int cons_quantity_needed = 0);
 		Product(const Product&);
 		Product& operator=(const Product&);
 		~Product();

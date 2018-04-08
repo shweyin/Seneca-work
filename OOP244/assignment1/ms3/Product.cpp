@@ -78,7 +78,8 @@ namespace AMA
 		taxable = false;
 	}
 
-	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, int cons_product_quantity = 0, bool cons_taxable = true, double cons_unit_price = 0, int cons_quantity_needed = 0)
+	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, 
+		int cons_product_quantity, bool cons_taxable, double cons_unit_price, int cons_quantity_needed)
 	{
 		type = 'N';
 		name(cons_sku_name);
@@ -103,6 +104,7 @@ namespace AMA
 		taxable = copy_target.taxable;
 		unit_price = copy_target.unit_price;
 		quantity_needed = copy_target.quantity_needed;
+		return *this;
 	}
 
 	Product::~Product()
@@ -110,10 +112,10 @@ namespace AMA
 		delete[] product_name;
 	}
 
-	std::fstream& Product::store(std::fstream& file, bool newLine = true) const
+	std::fstream& Product::store(std::fstream& file, bool newLine) const
 	{
 		file.open("myFile" , std::ios::out | std::ios::app);
-		file << sku << ","
+		file << sku_name << ","
 			<< product_name << ","
 			<< cost() << ","
 			<< product_quantity << ","
@@ -146,7 +148,7 @@ namespace AMA
 	{
 		if (linear)
 		{
-			std::cout << std::setw(max_sku_length) << sku << "|"
+			std::cout << std::setw(max_sku_length) << sku_name << "|"
 				<< std::setw(20) << product_name << "|"
 				<< std::setw(7) << cost() << "|"
 				<< std::setw(4) << product_quantity << "|"
@@ -156,7 +158,7 @@ namespace AMA
 		else
 		{
 			std::cout
-				<< "Sku: " << sku << std::endl
+				<< "Sku: " << sku_name << std::endl
 				<< "Name (no spaces): " << product_name << std::endl
 				<< "Price: " << unit_price << std::endl;
 			if (taxable) { std::cout << "Price after tax: " << cost() << std::endl; }
