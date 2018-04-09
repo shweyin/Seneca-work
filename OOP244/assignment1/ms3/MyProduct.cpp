@@ -69,7 +69,9 @@ namespace AMA {
 		file >> qtyNeeded;
 		file.clear();
 		file.close();
-		product = MyProduct(sku_, name, unit, quantity, taxed_ != 0, price_, qtyNeeded);
+		//product = MyProduct(sku_, name, unit, quantity, taxed_ != 0, price_, qtyNeeded);
+		MyProduct hitemp = MyProduct(sku_, name, unit, quantity, taxed_ != 0, price_, qtyNeeded);
+		product = hitemp;
 		return file;
 	}
 	std::ostream& Test::write(std::ostream& os, bool linear) const {

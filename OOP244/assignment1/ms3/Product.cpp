@@ -4,26 +4,23 @@ namespace AMA
 {
 	void Product::name(const char* param_product_name)
 	{
-		if (param_product_name)
-		{
-			int temp = strlen(param_product_name);
-			product_name = new char[temp];
-			strncpy(product_name, param_product_name, max_name_length);
-		}
-		else if (!param_product_name)
+		if (product_name)
 		{
 			delete[] product_name;
+			product_name = nullptr;
 		}
+		if (param_product_name)
+		{
+			int temp = strlen(param_product_name) + 1;
+			product_name = new char[temp];
+			strncpy(product_name, param_product_name, temp);
+		}
+
 	}
 
 	const char* Product::name() const
 	{
-		char* temp = nullptr;
-		if (strcmp(product_name, "") != 0)
-		{
-			strcpy(temp, product_name);
-		}
-		return temp;
+		return product_name;
 	}
 
 	const char* Product::sku() const
@@ -66,23 +63,26 @@ namespace AMA
 		return product_error_state.isClear();
 	}
 
-	Product::Product(char cons_char = 'N')
+	Product::Product(char cons_char)
 	{
 		type = cons_char;
-		strcpy(sku_name, "");
-		strcpy(unit_name, "");
+		sku_name[0] = '\0';
+		unit_name[0] = '\0';
 		product_name = nullptr;
 		product_quantity = 0;
 		quantity_needed = 0;
 		unit_price = 0;
 		taxable = false;
+		product_error_state;
 	}
 
 	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, 
 		int cons_product_quantity, bool cons_taxable, double cons_unit_price, int cons_quantity_needed)
 	{
 		type = 'N';
-		name(cons_sku_name);
+		strcpy(sku_name, cons_sku_name);
+		product_name = nullptr;
+		name(cons_product_name);
 		strcpy(unit_name, cons_unit_name);
 		product_quantity = cons_product_quantity;
 		taxable = cons_taxable;
@@ -114,14 +114,14 @@ namespace AMA
 
 	std::fstream& Product::store(std::fstream& file, bool newLine) const
 	{
-		file.open("myFile" , std::ios::out | std::ios::app);
-		file << sku_name << ","
-			<< product_name << ","
-			<< cost() << ","
-			<< product_quantity << ","
-			<< unit_name << ","
-			<< quantity_needed;
-		if (newLine)
+		if (file.is_open()) {
+			file << sku_name << ","
+				<< product_name << ","
+				<< cost() << ","
+				<< product_quantity << ","
+				<< unit_name << ","
+				<< quantity_needed;
+		}if (newLine)
 		{
 			file << std::endl;
 		}
@@ -148,7 +148,8 @@ namespace AMA
 	{
 		if (linear)
 		{
-			std::cout << std::setw(max_sku_length) << sku_name << "|"
+			ostr << std::fixed << std::left << std::setprecision(2);
+			ostr << std::setw(max_sku_length) << sku_name << "|"
 				<< std::setw(20) << product_name << "|"
 				<< std::setw(7) << cost() << "|"
 				<< std::setw(4) << product_quantity << "|"
@@ -157,14 +158,12 @@ namespace AMA
 		}
 		else
 		{
-			std::cout
-				<< "Sku: " << sku_name << std::endl
+			ostr << "Sku: " << sku_name << std::endl
 				<< "Name (no spaces): " << product_name << std::endl
 				<< "Price: " << unit_price << std::endl;
-			if (taxable) { std::cout << "Price after tax: " << cost() << std::endl; }
-			else { std::cout << "N/A" << std::endl; }
-			std::cout
-				<< "Quantity on hand: " << product_quantity << std::endl
+			if (taxable) { ostr << "Price after tax: " << cost() << std::endl; }
+			else { ostr << "N/A" << std::endl; }
+			ostr << "Quantity on hand: " << product_quantity << std::endl
 				<< "Quantity needed: " << quantity_needed << std::endl;
 		}
 		return ostr;
@@ -173,14 +172,15 @@ namespace AMA
 	std::istream& Product::read(std::istream& istr)
 	{
 		bool good = true;
+		char temparray[max_name_length];
 		Product temp;
 		std::cout << "Sku: ";
-		istr >> temp.sku_name;
+		istr.getline(temp.sku_name, max_sku_length);
 		std::cout << "Name (no spaces): ";
-		istr >> temp.product_name;
+		istr.getline(temparray, max_name_length);
 		std::cout << "Unit: ";
-		istr >> temp.unit_name;
-		std::cout << "Taxed? (y/n)";
+		istr.getline(temp.unit_name, max_unit_length);
+		std::cout << "Taxed? (y/n): ";
 		temp.taxable = YorN();
 		std::cout << "Price: ";
 		istr >> temp.unit_price;
@@ -188,6 +188,8 @@ namespace AMA
 		istr >> temp.product_quantity;
 		std::cout << "Quantity needed: ";
 		istr >> temp.quantity_needed;
+		istr.ignore();
+		temp.name(temparray);
 		if (good)
 		{
 			*this = temp;
