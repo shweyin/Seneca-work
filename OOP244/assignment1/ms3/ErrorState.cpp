@@ -4,6 +4,7 @@ namespace AMA
 {
 	ErrorState::ErrorState(const char* con_string)
 	{
+		error_msg = nullptr;
 		if (con_string)
 		{
 			message(con_string);
@@ -15,7 +16,7 @@ namespace AMA
 	}
 	void ErrorState::clear()
 	{
-		if (strlen(error_msg) != 0)
+		if (error_msg)
 		{
 			delete[] error_msg;
 			error_msg = nullptr;
@@ -28,10 +29,13 @@ namespace AMA
 	}
 	void ErrorState::message(const char* msg_string)
 	{
-		clear();
-		int length = strlen(msg_string);
-		error_msg = new char[length + 1];
-		strcpy(error_msg, msg_string);
+		if (msg_string)
+		{
+			clear();
+			int length = strlen(msg_string);
+			error_msg = new char[length + 1];
+			strcpy(error_msg, msg_string);
+		}
 	}
 	const char* ErrorState::message() const
 	{

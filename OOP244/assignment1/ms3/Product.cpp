@@ -65,6 +65,11 @@ namespace AMA
 
 	Product::Product(char cons_char)
 	{
+		setEmpty(cons_char);
+	}
+
+	void Product::setEmpty(char cons_char)
+	{
 		type = cons_char;
 		sku_name[0] = '\0';
 		unit_name[0] = '\0';
@@ -73,7 +78,6 @@ namespace AMA
 		quantity_needed = 0;
 		unit_price = 0;
 		taxable = false;
-		//product_error_state;
 	}
 
 	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, 
@@ -97,13 +101,19 @@ namespace AMA
 
 	Product& Product::operator=(const Product& copy_target)
 	{
+		setEmpty(copy_target.type);
 		type = copy_target.type;
+		strcpy(sku_name, copy_target.sku_name);
 		name(copy_target.product_name);
 		strcpy(unit_name, copy_target.unit_name);
 		product_quantity = copy_target.product_quantity;
 		taxable = copy_target.taxable;
 		unit_price = copy_target.unit_price;
 		quantity_needed = copy_target.quantity_needed;
+		if (!copy_target.product_error_state.isClear())
+		{
+			product_error_state.message(copy_target.product_error_state.message());
+		}
 		return *this;
 	}
 
@@ -151,10 +161,10 @@ namespace AMA
 			ostr << std::fixed << std::left << std::setprecision(2);
 			ostr << std::setw(max_sku_length) << sku_name << "|"
 				<< std::setw(20) << product_name << "|"
-				<< std::setw(7) << cost() << "|"
+				<< std::setw(7) << std::right << cost() << "|"
 				<< std::setw(4) << product_quantity << "|"
-				<< std::setw(10) << unit_name << "|"
-				<< std::setw(4) << quantity_needed;
+				<< std::setw(10) << std::left << unit_name << "|"
+				<< std::setw(4) << std::right << quantity_needed << "|";
 		}
 		else
 		{
@@ -175,32 +185,40 @@ namespace AMA
 		char temparray[max_name_length];
 		char yorn = '\0';
 		Product temp;
-		std::cout << "Sku: ";
+		std::cout << " Sku: ";
 		istr.getline(temp.sku_name, max_sku_length);
-		std::cout << "Name (no spaces): ";
+		std::cout << " Name (no spaces): ";
 		istr.getline(temparray, max_name_length);
 		temp.name(temparray);
-		std::cout << "Unit: ";
+		std::cout << " Unit: ";
 		istr.getline(temp.unit_name, max_unit_length);
-		std::cout << "Taxed? (y/n): ";
+		std::cout << " Taxed? (y/n): ";
 		istr >> yorn;
 		if (yorn == 'n' || yorn == 'N' || yorn == 'y' || yorn == 'Y')
 		{
-			std::cout << "Price: ";
+			if (yorn == 'y' || yorn == 'Y')
+			{
+				temp.taxable = true;
+			}
+			else
+			{
+				temp.taxable = false;
+			}
+			std::cout << " Price: ";
 			istr >> temp.unit_price;
 		}
 		else { temp.product_error_state.message("Only (Y)es or (N)o are acceptable"); good = false; }
 
 		if (good && !istr.fail())
 		{
-			std::cout << "Quantity on hand: ";
+			std::cout << " Quantity on hand: ";
 			istr >> temp.product_quantity;
 		}
 		else { temp.product_error_state.message("Invalid Price Entry"); good = false; }
 
 		if (good && !istr.fail())
 		{
-			std::cout << "Quantity needed: ";
+			std::cout << " Quantity needed: ";
 			istr >> temp.quantity_needed;
 		}
 		else { temp.product_error_state.message("Invalid Quantity Entry"); good = false; }
