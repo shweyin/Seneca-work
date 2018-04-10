@@ -45,12 +45,7 @@ namespace AMA
 
 	double Product::cost() const
 	{
-		double temp = 0.0;
-		if (taxable)
-		{
-			temp = unit_price * tax_rate;
-		}
-		return temp;
+		return taxable ? unit_price * (1 + tax_rate) : unit_price;
 	}
 
 	void Product::message(const char* func_error_msg)
@@ -252,7 +247,7 @@ namespace AMA
 
 	double Product::total_cost() const
 	{
-		return taxable ? (unit_price * product_quantity) * tax_rate : unit_price * product_quantity;
+		return taxable ? (unit_price * product_quantity) * (1+tax_rate) : unit_price * product_quantity;
 	}
 
 	void Product::quantity(int new_quantity)
