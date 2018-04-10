@@ -8,10 +8,6 @@ namespace AMA
 		{
 			message(con_string);
 		}
-		else
-		{
-			clear();
-		}
 	}
 	ErrorState::~ErrorState()
 	{
@@ -19,24 +15,20 @@ namespace AMA
 	}
 	void ErrorState::clear()
 	{
-		error_msg_delete();
-		error_msg = new char[empty_size];
-		strcpy(error_msg, "Empty!");
-	}
-	void ErrorState::error_msg_delete()
-	{
-		if (error_msg)
+		if (strlen(error_msg) != 0)
 		{
 			delete[] error_msg;
+			error_msg = nullptr;
 		}
 	}
+	
 	bool ErrorState::isClear() const
 	{
-		return (strcmp(error_msg, "Empty!") == 0);
+		return !error_msg;
 	}
 	void ErrorState::message(const char* msg_string)
 	{
-		error_msg_delete();
+		clear();
 		int length = strlen(msg_string);
 		error_msg = new char[length + 1];
 		strcpy(error_msg, msg_string);

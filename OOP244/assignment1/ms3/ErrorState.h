@@ -12,9 +12,8 @@ namespace AMA
 	class ErrorState
 	{
 		char* error_msg;
-		void error_msg_delete();
 	public:
-		explicit ErrorState(const char* = nullptr);
+		explicit ErrorState(const char* con_string = nullptr);
 		ErrorState(const ErrorState&) = delete;
 		ErrorState& operator=(const ErrorState&) = delete;
 		virtual ~ErrorState();

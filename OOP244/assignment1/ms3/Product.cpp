@@ -11,9 +11,9 @@ namespace AMA
 		}
 		if (param_product_name)
 		{
-			int temp = strlen(param_product_name) + 1;
-			product_name = new char[temp];
-			strncpy(product_name, param_product_name, temp);
+			int str_length = strlen(param_product_name);
+			product_name = new char[str_length + 1];
+			strcpy(product_name, param_product_name);
 		}
 
 	}
@@ -73,7 +73,7 @@ namespace AMA
 		quantity_needed = 0;
 		unit_price = 0;
 		taxable = false;
-		product_error_state;
+		//product_error_state;
 	}
 
 	Product::Product(const char* cons_sku_name, const char* cons_product_name, const char* cons_unit_name, 
@@ -173,23 +173,42 @@ namespace AMA
 	{
 		bool good = true;
 		char temparray[max_name_length];
+		char yorn = '\0';
 		Product temp;
 		std::cout << "Sku: ";
 		istr.getline(temp.sku_name, max_sku_length);
 		std::cout << "Name (no spaces): ";
 		istr.getline(temparray, max_name_length);
+		temp.name(temparray);
 		std::cout << "Unit: ";
 		istr.getline(temp.unit_name, max_unit_length);
 		std::cout << "Taxed? (y/n): ";
-		temp.taxable = YorN();
-		std::cout << "Price: ";
-		istr >> temp.unit_price;
-		std::cout << "Quantity on hand: ";
-		istr >> temp.product_quantity;
-		std::cout << "Quantity needed: ";
-		istr >> temp.quantity_needed;
+		istr >> yorn;
+		if (yorn == 'n' || yorn == 'N' || yorn == 'y' || yorn == 'Y')
+		{
+			std::cout << "Price: ";
+			istr >> temp.unit_price;
+		}
+		else { temp.product_error_state.message("Only (Y)es or (N)o are acceptable"); good = false; }
+
+		if (good && !istr.fail())
+		{
+			std::cout << "Quantity on hand: ";
+			istr >> temp.product_quantity;
+		}
+		else { temp.product_error_state.message("Invalid Price Entry"); good = false; }
+
+		if (good && !istr.fail())
+		{
+			std::cout << "Quantity needed: ";
+			istr >> temp.quantity_needed;
+		}
+		else { temp.product_error_state.message("Invalid Quantity Entry"); good = false; }
+
+		if(istr.fail())
+		{temp.product_error_state.message("Invalid Quantity Needed Entry"); good = false;}
 		istr.ignore();
-		temp.name(temparray);
+
 		if (good)
 		{
 			*this = temp;
@@ -206,7 +225,6 @@ namespace AMA
 			yes = true;
 		}
 		return yes;
-
 	}
 
 	bool Product::operator==(const char* compared_sku_name)
