@@ -20,7 +20,7 @@ namespace AMA {
 	};
 	std::ostream& operator<<(std::ostream&, const iProduct&);
 	std::istream& operator>>(std::istream&, iProduct&);
-	std::istream& operator>>(std::istream&, iProduct&);
+	double operator+=(double&, const iProduct&);
 	iProduct* CreateProduct();
 	iProduct* CreatePerishable();
 }
