@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>A5 Shweyin Than</title>
+        <link rel="stylesheet" href="css/main.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <header>
+                <h2>
+                    <img id="logo" src="img/seneca_logo.png" alt="Logo" width="50" height="50">
+                    Shweyin's Website
+                </h2>
+            </header>
+            <div class="middle">
+            <nav>
+                    <ul>
+                        <li><a href="index.html">Back To Home</a></li>
+                    </ul>
+            </nav>
+            <div class="sidePanel">
+                <ul>
+                    <li>
+                        <img id="logo" src="img/email.gif" alt="Email Me" width="25" height="25">
+                        <a href="mailto:shweyin@gmail.com">Email Me</a>
+                    </li>
+                </ul>
+                    
+            </div>
+            <div class="registrationBody">
+                    <form method="post" name="myForm" action="https://httpbin.org/post" onsubmit="return checkForm(this);">
+                        <label>First Name: </label><input name="FirstName" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Last Name: </label><input name="Last Name" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>User Name: </label><input name="User Name" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Password: </label><input name="Password" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Re-enter Password: </label><input name="Password2" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Phone Number: </label><input name="Phone Number" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Email: </label><input name="EmailForm" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Street Number and Street Name: </label><input name="street" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>City: </label><input name="city" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Province: </label><input name="province" placeholder="LastName, FirstName" type="text" required> <br>
+                        <label>Postal Code: </label><input name="postal" placeholder="LastName, FirstName" type="text" required> <br>
+
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </form>
+            </div>
+            </div>
+            <footer>
+                <div>
+                    2018 Shweyin Than - Copyright
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
