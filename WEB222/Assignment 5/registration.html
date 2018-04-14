@@ -29,17 +29,37 @@
             </div>
             <div class="registrationBody">
                     <form method="post" name="myForm" action="https://httpbin.org/post" onsubmit="return checkForm(this);">
-                        <label>First Name: </label><input name="FirstName" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Last Name: </label><input name="Last Name" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>User Name: </label><input name="User Name" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Password: </label><input name="Password" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Re-enter Password: </label><input name="Password2" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Phone Number: </label><input name="Phone Number" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Email: </label><input name="EmailForm" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Street Number and Street Name: </label><input name="street" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>City: </label><input name="city" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Province: </label><input name="province" placeholder="LastName, FirstName" type="text" required> <br>
-                        <label>Postal Code: </label><input name="postal" placeholder="LastName, FirstName" type="text" required> <br>
+                        
+                        <label>User Name: &nbsp;</label>
+                        <input name="UserName" name="UserName" placeholder="Username" type="text" required onchange="username(this.value)"> 
+                        <br><br>
+                        <label>Password: &nbsp;</label>
+                        <input name="Password" id="Password" placeholder="Password" type="text" required onchange="password(this.value)"> 
+                        <br><br>
+                        <label>Re-enter Password: &nbsp;</label>
+                        <input name="Password2" id="Password2" placeholder="Re-Enter Password" type="text" required onchange="password(this.value)"> 
+                        <br><br>
+                        <label>Phone Number: &nbsp;</label>
+                        <input name="PhoneNumber" id="PhoneNumber" placeholder="Phone Number" type="text" required onchange="phone(this.value)"> 
+                        <br><br>
+                        <label>Email: &nbsp;</label>
+                        <input name="EmailForm" placeholder="Email" type="text" required onchange="email(this.value)"> 
+                        <br><br>
+                        <label>Address: &nbsp;</label>
+                        <input name="street" placeholder="Address" type="text" required onchange="street(this.value)"> 
+                        <br><br>
+                        <label>City: &nbsp;</label>
+                        <input name="city" placeholder="City" type="text" required onchange="city(this.value)"> 
+                        <br><br>
+                        <label>Province: &nbsp;</label>
+                        <input name="province" placeholder="Province" type="text" required onchange="province(this.value)"> 
+                        <br><br>
+                        <label>Postal Code: &nbsp;</label>
+                        <input name="postal" placeholder="Postal Code" type="text" required onchange="postal(this.value)"> 
+                        <br><br>
+
+                        <input name="firstName" id="firstName" type="hidden" required value="First Name Here"> <br><br>
+                        <input name="lastName" id="lastName" type="hidden" required value="Last Name Here"> <br><br>
 
                         <input type="submit" value="Submit">
                         <input type="reset" value="Reset">
