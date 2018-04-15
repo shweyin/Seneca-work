@@ -240,7 +240,7 @@ namespace AMA
 		return yes;
 	}
 
-	bool Product::operator==(const char* compared_sku_name)
+	bool Product::operator==(const char* compared_sku_name) const
 	{
 		return (strcmp(sku_name, compared_sku_name) == 0);
 	}

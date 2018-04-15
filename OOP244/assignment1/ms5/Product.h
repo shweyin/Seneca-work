@@ -47,7 +47,7 @@ namespace AMA
 		std::fstream& load(std::fstream&);
 		std::ostream& write(std::ostream&, bool) const;
 		std::istream& read(std::istream&);
-		bool operator==(const char*);
+		bool operator==(const char*) const;
 		double total_cost() const;
 		void quantity(int);
 		bool isEmpty() const;

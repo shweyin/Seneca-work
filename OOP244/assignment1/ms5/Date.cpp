@@ -72,7 +72,7 @@ namespace AMA {
 	{
 		return errState == NO_ERROR ? true : false;
 	}
-	std::istream & Date::read(std::istream& istr)
+	std::istream& Date::read(std::istream& istr)
 	{
 		istr >> year;
 		istr.get();
