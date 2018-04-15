@@ -10,7 +10,7 @@ namespace AMA
 
 	std::fstream& Perishable::store(std::fstream& file, bool newLine) const
 	{
-		Product::store(file, newLine);
+		Product::store(file, false);
 		file << ",";
 		expiry_date.write(file);
 		if (newLine)
@@ -31,19 +31,23 @@ namespace AMA
 
 	std::ostream& Perishable::write(std::ostream& os, bool linear) const
 	{
-		Product::write(os, linear);
 		if (!expiry_date.bad())
 		{
+			Product::write(os, linear);
 			if (linear)
 			{
-				os << "|";
+				//os << "|";
 				expiry_date.write(os);
 			}
 			else
 			{
-				os << std::endl << "Expiry date: ";
+				os << /*std::endl <<*/ "Expiry date: ";
 				expiry_date.write(os);
 			}
+		}
+		else
+		{
+			std::cout << message();
 		}
 		return os;
 	}
@@ -60,18 +64,22 @@ namespace AMA
 			{
 				if (temp.errCode() == 1)
 				{
+					expiry_date.errCode(1);
 					message("Invalid Date Entry");
 				}
 				else if (temp.errCode() == 2)
 				{
+					expiry_date.errCode(2);
 					message("Invalid Year in Date Entry");
 				}
 				else if (temp.errCode() == 3)
 				{
+					expiry_date.errCode(3);
 					message("Invalid Month in Date Entry");
 				}
 				else if (temp.errCode() == 4)
 				{
+					expiry_date.errCode(4);
 					message("Invalid Day in Date Entry");
 				}
 				is.setstate(std::ios::failbit);

@@ -47,6 +47,10 @@ namespace AMA
 	{
 		return taxable ? unit_price * (1 + tax_rate) : unit_price;
 	}
+	const char* Product::message() const
+	{
+		return product_error_state.message();
+	}
 
 	void Product::message(const char* func_error_msg)
 	{
@@ -120,11 +124,14 @@ namespace AMA
 	std::fstream& Product::store(std::fstream& file, bool newLine) const
 	{
 		if (file.is_open()) {
-			file << sku_name << ","
+			int taxableNum = taxable ? 1 : 0;
+			file << type << ","
+				<< sku_name << ","
 				<< product_name << ","
-				<< cost() << ","
-				<< product_quantity << ","
 				<< unit_name << ","
+				<<taxableNum << ","
+				<< unit_price << ","
+				<< product_quantity << ","
 				<< quantity_needed;
 		}if (newLine)
 		{
@@ -137,21 +144,52 @@ namespace AMA
 	{
 		Product temp;
 		file.open("myFile", std::ios::in);
-		file >> temp.sku_name;
-		file >> temp.product_name;
-		file >> temp.unit_name;
-		file >> temp.taxable;
-		file >> temp.unit_price;
+		int taxableNum = 1;
+		char temp_product_name[max_name_length];
+		/*file >> temp.type;
+		file.ignore(2000, ',');
+		file.get(temp_sku_name, max_sku_length, ',');
+		temp.name(temp_sku_name);
+		file.ignore(2000, ',');
+		file.get(temp.product_name, max_name_length, ',');
+		file.ignore(2000, ',');
+		file.get(temp.unit_name, max_unit_length, ',');
+		file.ignore(2000, ',');
+		file >> taxableNum;
+		temp.taxable = taxableNum == 1 ? true : false;
+		file.ignore(2000, ',');
 		file >> temp.product_quantity;
+		file.ignore(2000, ',');
 		file >> temp.quantity_needed;
+		file.ignore(2000, '\n');*/
+		char trash = '\0';
+		file.get(temp.type);
+		file.get(trash);
+		file.get(temp.sku_name, max_sku_length, ',');
+		file.get(trash);
+		file.get(temp_product_name, max_name_length, ',');
+		temp.name(temp_product_name);
+		file.get(trash);
+		file.get(temp.unit_name, max_unit_length, ',');
+		file.get(trash);
+		file >> taxableNum;
+		file.get(trash);
+		temp.taxable = taxableNum == 1 ? true : false;
+		file >> temp.unit_price;
+		file.get(trash);
+		file >> temp.product_quantity;
+		file.get(trash);
+		file >> temp.quantity_needed;
+		file.get(trash);
 		file.clear();
 		file.close();
+		*this = temp;
 		return file;
 	}
 
 	std::ostream& Product::write(std::ostream& ostr, bool linear) const
 	{
-		if (linear)
+		if (!isEmpty() && linear)
 		{
 			ostr << std::fixed << std::left << std::setprecision(2);
 			ostr << std::setw(max_sku_length) << sku_name << "|"
@@ -161,15 +199,20 @@ namespace AMA
 				<< std::setw(10) << std::left << unit_name << "|"
 				<< std::setw(4) << std::right << quantity_needed << "|";
 		}
-		else
+		else if (!isEmpty() && !linear)
 		{
 			ostr << "Sku: " << sku_name << std::endl
 				<< "Name (no spaces): " << product_name << std::endl
 				<< "Price: " << unit_price << std::endl;
-			if (taxable) { ostr << "Price after tax: " << cost() << std::endl; }
+			ostr << "Price after tax: ";
+			if (taxable) { ostr  << cost() << std::endl; }
 			else { ostr << "N/A" << std::endl; }
 			ostr << "Quantity on hand: " << product_quantity << std::endl
 				<< "Quantity needed: " << quantity_needed << std::endl;
+		}
+		else if (isEmpty())
+		{
+			ostr << product_error_state.message();
 		}
 		return ostr;
 	}
@@ -199,45 +242,52 @@ namespace AMA
 			{
 				temp.taxable = false;
 			}
+			
+		}
+		else 
+		{ 
+			message("Only (Y)es or (N)o are acceptable"); 
+			good = false; 
+			istr.setstate(std::ios::failbit);
+		}
+
+		if (good && !istr.fail())
+		{
 			std::cout << " Price: ";
 			istr >> temp.unit_price;
+			if (istr.fail())
+			{
+				message("Invalid Price Entry");
+				good = false;
+			}
 		}
-		else { temp.product_error_state.message("Only (Y)es or (N)o are acceptable"); good = false; }
 
 		if (good && !istr.fail())
 		{
 			std::cout << " Quantity on hand: ";
 			istr >> temp.product_quantity;
+			if (istr.fail())
+			{
+				message("Invalid Quantity Entry");
+				good = false;
+			}
 		}
-		else { temp.product_error_state.message("Invalid Price Entry"); good = false; }
 
 		if (good && !istr.fail())
 		{
 			std::cout << " Quantity needed: ";
 			istr >> temp.quantity_needed;
+			if (istr.fail())
+			{
+				message("Invalid Quantity Needed Entry"); 
+				good = false;
+			}
 		}
-		else { temp.product_error_state.message("Invalid Quantity Entry"); good = false; }
-
-		if(istr.fail())
-		{temp.product_error_state.message("Invalid Quantity Needed Entry"); good = false;}
-		istr.ignore();
-
 		if (good)
 		{
 			*this = temp;
 		}
 		return istr;
-	}
-	bool YorN()
-	{
-		char temp;
-		bool yes = false;
-		std::cin >> temp;
-		if (temp == 'y' || temp == 'Y')
-		{
-			yes = true;
-		}
-		return yes;
 	}
 
 	bool Product::operator==(const char* compared_sku_name) const
@@ -257,14 +307,7 @@ namespace AMA
 
 	bool Product::isEmpty() const
 	{
-		return (
-			strcmp(sku_name, "") == 0 &&
-			strcmp(unit_name, "") == 0 &&
-			product_name == nullptr &&
-			product_quantity == 0 &&
-			quantity_needed == 0 &&
-			unit_price == 0 &&
-			taxable == false);
+		return (!product_name);
 	}
 
 	int Product::qtyNeeded() const

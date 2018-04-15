@@ -33,6 +33,7 @@ namespace AMA
 		bool taxed() const;
 		double price() const;
 		double cost() const;
+		const char* message() const;
 		void message(const char*);
 		bool isClear() const;
 	public:
@@ -57,7 +58,6 @@ namespace AMA
 		bool operator>(const iProduct&) const;
 		int operator+=(int);
 	};
-	bool YorN();
 	std::ostream& operator<<(std::ostream&, const iProduct&);
 	std::istream& operator>>(std::istream&, iProduct&);
 	double operator+=(double&, const iProduct&);

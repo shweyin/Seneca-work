@@ -27,9 +27,9 @@ namespace AMA {
 	
 	Date::Date()
     {
-		year = 0000;
-		month = 00;
-		day = 00;
+		year = 0;
+		month = 0;
+		day = 0;
 		comparator = 0;
 		errCode(NO_ERROR);
 	}
@@ -70,51 +70,64 @@ namespace AMA {
 	}
 	bool Date::bad() const
 	{
-		return errState == NO_ERROR ? true : false;
+		return errState == 0 ? false : true;
 	}
 	std::istream& Date::read(std::istream& istr)
 	{
-		istr >> year;
-		istr.get();
-		istr >> month;
-		istr.get();
-		istr >> day;
-		
+		Date temp;
+		istr >> temp.year;
 		if (istr.fail())
 		{
 			errState = CIN_FAILED;
 		}
+		istr.get();
+		istr >> temp.month;
+		if (istr.fail())
+		{
+			errState = CIN_FAILED;
+		}
+		istr.get();
+		istr >> temp.day;
+		if (istr.fail())
+		{
+			errState = CIN_FAILED;
+		}
+		if (temp.year < min_year || temp.year > max_year)
+		{
+			temp.year = 0;
+			temp.month = 0;
+			temp.day = 0;
+			temp.comparator = 0;
+			errCode(YEAR_ERROR);
+		}
+		else if (temp.month < 1 || temp.month > 12)
+		{
+			temp.year = 0;
+			temp.month = 0;
+			temp.day = 0;
+			temp.comparator = 0;
+			errCode(MON_ERROR);
+		}
+		else if (temp.day < 1 || temp.day > mdays(temp.month, temp.year))
+		{
+			temp.year = 0;
+			temp.month = 0;
+			temp.day = 0;
+			temp.comparator = 0;
+			errCode(DAY_ERROR);
+		}
 		else
 		{
-			if (year < min_year || year > max_year)
-			{
-				year = 0000;
-				month = 00;
-				day = 00;
-				comparator = 0;
-				errCode(YEAR_ERROR);
-			}
-			else if (month < 1 || month > 12)
-			{
-				year = 0000;
-				month = 00;
-				day = 00;
-				comparator = 0;
-				errCode(MON_ERROR);
-			}
-			else if (day < 1 || day > mdays(month, year))
-			{
-				year = 0000;
-				month = 00;
-				day = 00;
-				comparator = 0;
-				errCode(DAY_ERROR);
-			}
-			else
-			{
-				comparator = year * 372 + month * 13 + day;
-				errCode(NO_ERROR);
-			}
+			temp.comparator = year * 372 + month * 13 + day;
+			errCode(NO_ERROR);
+		}
+		if (errCode() == 0)
+		{
+			*this = temp;
+		}
+		else
+		{
+			istr.setstate(std::ios::failbit);
 		}
 		return istr;
 	}
