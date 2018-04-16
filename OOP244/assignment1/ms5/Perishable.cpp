@@ -41,7 +41,7 @@ namespace AMA
 			}
 			else
 			{
-				os << /*std::endl <<*/ "Expiry date: ";
+				os << std::endl << " Expiry date: ";
 				expiry_date.write(os);
 			}
 		}

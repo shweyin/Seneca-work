@@ -203,14 +203,14 @@ namespace AMA
 		}
 		else if (!isEmpty() && !linear)
 		{
-			ostr << "Sku: " << sku_name << std::endl
-				<< "Name (no spaces): " << product_name << std::endl
-				<< "Price: " << unit_price << std::endl;
-			ostr << "Price after tax: ";
+			ostr << " Sku: " << sku_name << std::endl
+				<< " Name (no spaces): " << product_name << std::endl
+				<< " Price: " << unit_price << std::endl;
+			ostr << " Price after tax: ";
 			if (taxable) { ostr  << cost() << std::endl; }
 			else { ostr << "N/A" << std::endl; }
-			ostr << "Quantity on hand: " << product_quantity << std::endl
-				<< "Quantity needed: " << quantity_needed << std::endl;
+			ostr << " Quantity on Hand: " << product_quantity << " " << unit_name << std::endl
+				<< " Quantity needed: " << quantity_needed;
 		}
 		else if (isEmpty())
 		{
