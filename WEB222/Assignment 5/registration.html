@@ -3,12 +3,15 @@
     <head>
         <title>A5 Shweyin Than</title>
         <link rel="stylesheet" href="css/main.css"/>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <script src="js/registration.js"></script>
     </head>
     <body>
         <div class="main">
             <header>
                 <h2>
-                    <img id="logo" src="img/seneca_logo.png" alt="Logo" width="50" height="50">
+                    <img class="logo" src="img/seneca_logo.png" alt="Logo" width="50" height="50">
                     Shweyin's Website
                 </h2>
             </header>
@@ -21,48 +24,61 @@
             <div class="sidePanel">
                 <ul>
                     <li>
-                        <img id="logo" src="img/email.gif" alt="Email Me" width="25" height="25">
+                        <img class="logo" src="img/email.gif" alt="Email Me" width="25" height="25">
                         <a href="mailto:shweyin@gmail.com">Email Me</a>
                     </li>
                 </ul>
                     
             </div>
             <div class="registrationBody">
-                    <form method="post" name="myForm" action="https://httpbin.org/post" onsubmit="return checkForm(this);">
+                    <form method="post" name="myForm" action="https://httpbin.org/post" onsubmit="return formCheck();">
                         
                         <label>User Name: &nbsp;</label>
-                        <input name="UserName" name="UserName" placeholder="Username" type="text" required onchange="username(this.value)"> 
+                        <input name="Username" id="Username" placeholder="Username" type="text" required onchange="usernameCheck()"> <div id="usernameID" class="error"></div>
                         <br><br>
                         <label>Password: &nbsp;</label>
-                        <input name="Password" id="Password" placeholder="Password" type="text" required onchange="password(this.value)"> 
+                        <input name="Password" id="Password" placeholder="Password" type="text" required onchange="passwordCheck()"> <div id="passwordID" class="error"></div>
                         <br><br>
                         <label>Re-enter Password: &nbsp;</label>
-                        <input name="Password2" id="Password2" placeholder="Re-Enter Password" type="text" required onchange="password(this.value)"> 
+                        <input name="Password2" id="Password2" placeholder="Re-Enter Password" type="text" required onchange="passwordCheck()"> <div id="passwordID2" class="error"></div>
                         <br><br>
                         <label>Phone Number: &nbsp;</label>
-                        <input name="PhoneNumber" id="PhoneNumber" placeholder="Phone Number" type="text" required onchange="phone(this.value)"> 
+                        <input name="PhoneNumber" id="PhoneNumber" placeholder="xxx-xxx-xxxx" type="text" required onchange="phoneCheck()"><div id="numberID" class="error"></div>
                         <br><br>
                         <label>Email: &nbsp;</label>
-                        <input name="EmailForm" placeholder="Email" type="text" required onchange="email(this.value)"> 
+                        <input name="EmailForm" placeholder="Email" type="email" required>
                         <br><br>
                         <label>Address: &nbsp;</label>
-                        <input name="street" placeholder="Address" type="text" required onchange="street(this.value)"> 
+                        <input name="street" placeholder="Address" type="text" required>
                         <br><br>
                         <label>City: &nbsp;</label>
-                        <input name="city" placeholder="City" type="text" required onchange="city(this.value)"> 
+                        <input name="city" id ="city" placeholder="City" type="text" required onchange="cityCheck()"> <div id="cityID" class="error"></div>
                         <br><br>
                         <label>Province: &nbsp;</label>
-                        <input name="province" placeholder="Province" type="text" required onchange="province(this.value)"> 
+                        <select name="province" type="text" required>
+                            <option selected>Ontario</option>
+                            <option>Quebec</option>
+                            <option>Manitoba</option>
+                            <option>Alberta</option>
+                            <option>Saskatchewan</option>
+                            <option>British Columbia</option>
+                            <option>Yukon</option>
+                            <option>Northwest Territories</option>
+                            <option>Nunavut</option>
+                            <option>New Brunswick</option>
+                            <option>Nova Scotia</option>
+                            <option>Newfoundland and Labrador</option>
+                        </select>
                         <br><br>
                         <label>Postal Code: &nbsp;</label>
-                        <input name="postal" placeholder="Postal Code" type="text" required onchange="postal(this.value)"> 
+                        <input name="postal" id="postal" placeholder="Postal Code" type="text" required onchange="postalCheck()"> <div id="postalID" class="error"></div>
                         <br><br>
 
                         <input name="firstName" id="firstName" type="hidden" required value="First Name Here"> <br><br>
                         <input name="lastName" id="lastName" type="hidden" required value="Last Name Here"> <br><br>
 
-                        <input type="submit" value="Submit">
-                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit"> 
+                        <input type="reset" value="Reset"><label id="finalSubmit" class="error"></label>
                     </form>
             </div>
             </div>
