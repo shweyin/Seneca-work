@@ -31,7 +31,7 @@ using namespace std;
 using namespace AMA;
 
 int main() {
-  //testProduct();
+  testProduct();
   cout << endl;
   testPerishable();
 }

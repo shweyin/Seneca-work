@@ -17,8 +17,8 @@ namespace AMA
 	class Product : public iProduct
 	{
 		char type;
-		char sku_name[max_sku_length];
-		char unit_name[max_unit_length];
+		char sku_name[max_sku_length + 1];
+		char unit_name[max_unit_length + 1];
 		char* product_name;
 		int product_quantity;
 		int quantity_needed;

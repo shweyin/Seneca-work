@@ -142,56 +142,58 @@ namespace AMA
 
 	std::fstream& Product::load(std::fstream& file)
 	{
-		Product temp;
-		file.open("myFile", std::ios::in);
+		/*Product temp;
 		int taxableNum = 1;
-		char temp_product_name[max_name_length];
-		/*file >> temp.type;
-		file.ignore(2000, ',');
-		file.get(temp_sku_name, max_sku_length, ',');
-		temp.name(temp_sku_name);
-		file.ignore(2000, ',');
-		file.get(temp.product_name, max_name_length, ',');
-		file.ignore(2000, ',');
-		file.get(temp.unit_name, max_unit_length, ',');
-		file.ignore(2000, ',');
-		file >> taxableNum;
-		temp.taxable = taxableNum == 1 ? true : false;
-		file.ignore(2000, ',');
-		file >> temp.product_quantity;
-		file.ignore(2000, ',');
-		file >> temp.quantity_needed;
-		file.ignore(2000, '\n');*/
-		char trash = '\0';
+		char temp_product_name[max_name_length + 1] = "";
 		file.get(temp.type);
-		file.get(trash);
-		file.get(temp.sku_name, max_sku_length, ',');
-		file.get(trash);
-		file.get(temp_product_name, max_name_length, ',');
+		file.ignore();
+		file.getline(temp.sku_name, max_sku_length + 1, ',');
+		file.getline(temp_product_name, max_name_length + 1, ',');
 		temp.name(temp_product_name);
-		file.get(trash);
-		file.get(temp.unit_name, max_unit_length, ',');
-		file.get(trash);
+		file.getline(temp.unit_name, max_unit_length + 1, ',');
 		file >> taxableNum;
-		file.get(trash);
 		temp.taxable = taxableNum == 1 ? true : false;
+		file.ignore();
 		file >> temp.unit_price;
-		file.get(trash);
+		file.ignore();
 		file >> temp.product_quantity;
-		file.get(trash);
+		file.ignore();
 		file >> temp.quantity_needed;
-		file.get(trash);
+		file.ignore();
+
 		file.clear();
 		file.close();
 		*this = temp;
+		return file;*/
+		char tsku[max_sku_length + 1];
+		char tunit[max_unit_length + 1];
+		char tname[max_name_length + 1];
+		double tprice;
+		int tqty, tqtyNeeded;
+		char tax;
+		file.getline(tsku, 1999, ',');
+		file.getline(tname, 1999, ',');
+		file.getline(tunit, 1999, ',');
+		file >> tax;
+		file.ignore();
+		file >> tprice;
+		file.ignore();
+		file >> tqty;
+		file.ignore();
+		file >> tqtyNeeded;
+		file.ignore();
+		char ttype = type;
+		*this = Product(tsku, tname, tunit, tqty, tax != '0', tprice, tqtyNeeded);
+		type = ttype;
 		return file;
+
 	}
 
 	std::ostream& Product::write(std::ostream& ostr, bool linear) const
 	{
 		if (!isEmpty() && linear)
 		{
-			ostr << std::fixed << std::left << std::setprecision(2);
+			ostr << std::fixed << std::left << std::setprecision(2) << std::setfill(' ');
 			ostr << std::setw(max_sku_length) << sku_name << "|"
 				<< std::setw(20) << product_name << "|"
 				<< std::setw(7) << std::right << cost() << "|"
@@ -222,7 +224,7 @@ namespace AMA
 		bool good = true;
 		char temparray[max_name_length];
 		char yorn = '\0';
-		Product temp;
+		Product temp = *this;
 		std::cout << " Sku: ";
 		istr.getline(temp.sku_name, max_sku_length);
 		std::cout << " Name (no spaces): ";
