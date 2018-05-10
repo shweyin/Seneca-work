@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 	{
 		std::cout << " " << argv[i];
 	}
+	std::cout << std::endl;
 	if (argc <= 1)
 	{
 		std::cout << "Insufficient number of arguments (min 1)";
@@ -18,7 +19,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		std::cout << std::endl << "Maximum number of characters stored : " << STORED << std::endl;
+		std::cout << "Maximum number of characters stored : " << STORED << std::endl;
 		for (int i = 1; i < argc; i++)
 		{
 			process(argv[i]);

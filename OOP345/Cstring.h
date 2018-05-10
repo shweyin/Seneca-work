@@ -9,7 +9,7 @@ namespace w1
 	{
 		char mystring[MAX + 1];
 	public:
-		Cstring(char* cons_string = "");
+		Cstring(const char* cons_string = "");
 		std::ostream& display(std::ostream&);
 	};
 	std::ostream& operator<<(std::ostream&, Cstring);
