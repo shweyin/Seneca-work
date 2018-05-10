@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Calculation </title>
+    <meta http-equiv="content-type"
+             content="text/html;charset=utf-8" />
+    <script>
+          function calculate() {
+	     // var items    = document.form1.noitems.selectedIndex;
+	      var items    = Number(document.form1.noitems.value);
+
+	      var ttotal   = items  * Number(document.form1.price.value);
+
+	      var thst     = ttotal * 0.13;
+
+	      var tfinal = ttotal * 1.13;
+		  
+		  /* enable the disabled fields */
+          document.form1.total.disabled = false;  // enable a disabled field
+		  document.form1.hst.disabled = false;
+		  document.form1.pay.readonly = false;    // set the readonly field for writing 
+	      document.form1.total.value = ttotal.toFixed(2);
+	      document.form1.hst.value   = thst.toFixed(2);
+	      document.form1.pay.value   = tfinal.toFixed(2);
+		  
+		  /* disable the enabled fields */
+		  document.form1.total.disabled = true;
+		  document.form1.hst.disabled = true;
+		  document.form1.pay.readonly = true;
+	    }
+       </script>
+</head>
+<body>
+   <form method='post' name='form1' id = 'form1'
+        action = "http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi">
+       <p> No. of computers   
+	           <select name='noitems'>
+	             <option value ="0">0</option>
+	             <option>1</option>
+	             <option>2</option>
+	           </select>
+		</p>
+        <p>Price per computer 
+           <input type='text' name='price' size='7' value='1000.00' readonly />
+		</p>
+      <p> Sub Total   
+        <input type="text" name="total" size="10" value="0.00" disabled />  
+	  </p>
+      <p> HST.
+        <input type="text" name="hst" size="10" value="0.00"  disabled />
+      </p>
+
+       <p> Final Total
+           <input type="text" name="pay" size="10" value="0.00" readonly />
+       </p>
+
+       <input type='button' value='  Calculate '
+              onclick="calculate();" />
+        <br /> <br />
+        
+        <input type="reset" value="Reset" 
+		  onclick = "document.form1.total.disabled = true;
+		  document.form1.hst.disabled = true;
+		  document.form1.pay.disabled = true; "/>
+  </form>
+
+
+</body>
+</html>

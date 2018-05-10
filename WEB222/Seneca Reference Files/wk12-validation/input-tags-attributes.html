@@ -1,0 +1,128 @@
+/* js-form-validation-name-and-phone.html */
+
+
+<html lang="en">
+  
+ <head>
+   <meta charset="UTF-8" />
+   <title>Form validation </title>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+	  
+	  .errorsTable, .errorsTable td {vertical-align:top;}
+
+      .inputbox 
+	  { 
+            background-color: #ffffff; 
+            border-top:    7px dashed #0000ff; 
+            border-bottom: 7px dashed #0000ff; 
+            border-left:   7px solid  #ff0000; 
+            border-right:  7px solid  #ff0000; 
+      }
+      .inputtext 
+	  {
+            font-size: 14px; 
+            font-style:italic;
+            font-weight:bold;
+      }
+   </style>
+   <script>
+      function formValidation() {
+         return validateSurname() && validatePhoneNumber();
+      }
+      
+      function validateSurname() {
+        var passAlpha = false;
+        var alphString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var elem = document.querySelector("#client");
+        var inputValue = elem.value.trim();
+       
+	    if (inputValue.length == 0) {      /* check the length */
+		   alert("No input! Please enter a meaningful name with at least one letter.\n");
+		   return false;
+        }
+		 
+        for (var i = 0; i < inputValue.length; i++) {
+           // check at least one character is a letter
+           if (alphString.indexOf(inputValue.substr(i,1))>= 0) {
+              passAlpha = true;
+           }
+        }  // for
+        
+        if (!passAlpha){
+           alert("Name : Please enter a meaningful name with at least one letter.");
+           elem.focus();
+           return false; // failed for validation
+        } 
+		
+		return true; // passed for validation
+      }  //  End of function
+      
+      function validatePhoneNumber() {
+
+         input = form1.pnumber.value.trim();
+
+		 if (input.length != 10) { // check 10 characters
+            alert("Please enter 10 digits");
+			form1.pnumber.focus();
+			return false; // failed for validation
+         }
+		 
+         if (parseInt(input) != input) { // check all digits
+            alert('Please enter a phone number, numbers only');
+            form1.pnumber.focus();
+	        return false; // failed for validation
+         }
+       
+         return true; // passed for validation
+
+      }  //  End of function 
+   </script>
+ </head>
+ <body>
+   
+    <div id="content" style="font-family:monospace;font-size:14px;">
+	<h1>JavaScript - Form Validation</h1>
+    <h4><mark> - Validating Text Field</mark></h4>
+    <h4><mark> - Rule for client name: at least one alphabetic letter </mark></h4>
+    <h4><mark> - Rule for phone number: all digits</mark></h4>
+    
+    <!-- Start of example -->
+    <form id='example' name='form1' 
+            method='post' 
+            action='https://httpbin.org/post' 
+            onsubmit='return formValidation();'><br>
+       
+        <p>
+            <label title="Name must have a minimum of 4 alphabetic characters."
+                   for="client">Client Name</label> 
+            <span class='inputbox'>
+              <input class='inputtext' id='client' name='surname' autofocus required 
+                     size='20' value='' maxlength='15'/>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+            <label title="Phone number must have the format of ###-###-####."
+                   for="pnumber"> Phone Number </label> 
+            <span class='inputbox'>
+              <input class='inputtext' id='pnumber' name='phone'
+                     required size='20' value='' maxlength='15'>
+            </span>
+        </p><br>
+     
+        <p>
+           <input type="submit" value="Submit Information" /> &nbsp;&nbsp;  
+           <input type="reset"  value="    Clear   " />  
+        </p> 
+	</form>
+    <!-- End of example -->
+
+    </div>
+    
+ </body>
+</html>

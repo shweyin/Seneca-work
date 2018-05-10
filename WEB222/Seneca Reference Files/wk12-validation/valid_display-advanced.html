@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title> Validation Example </title>
+     <meta http-equiv="content-type"
+              content="text/html;charset=utf-8" />
+	<style>
+	    input:focus{
+					border: darkgreen 1px solid;
+					background: yellow;
+					}
+					/*p:hover{color: red;} */
+			a:hover{font-size:1.5em; background: #BF0000;}
+			#id1:hover{background: grey;}
+	</style>
+     <script>
+	        /* validate the form while submitting the data */
+            function validateMyForm(frm1)
+            {
+			   var errMsg = "";
+               if (frm1.phone.value.length != 10)
+               {
+			     errMsg = "enter 10 digits";
+				 displayError("phoneId", "phoneErr", errMsg);
+                 /* alert("enter 10 digits");
+                 frm1.phone.focus();
+ 		         frm1.phone.select();
+				 */
+		         return false;
+                }
+               else  if (parseInt(frm1.phone.value) != frm1.phone.value)
+		      {   errMsg = "enter phone number, digit only";
+			      displayError("phoneId", "phoneErr", errMsg);
+			  /*
+		         alert('Please enter a phone number, numbers only');
+		         frm1.phone.focus();
+		         frm1.phone.select();
+				 */
+				 /*  if invalid, stop submitting the form by return false  */
+		         return false;  
+               }
+			   /* if input is valid, clear Error Message, and submit the form */
+			   clearErr("phoneId", "phoneErr");
+               return true;
+             }
+			 
+			/* highlight the error field, display error message */
+			function displayError(fieldId,errId, errMsg)
+			{
+			    /* get the field object with invalid input */
+			    var fieldObj = document.getElementById(fieldId);
+				
+				/* hightlight the error field with red border */
+				fieldObj.style.border="solid 1px red";
+			    
+				/* error field gets focus and selected, ready to reinput */
+				fieldObj.focus();
+				fieldObj.select();
+				
+				/* display error message beside the error field in red */
+				var errObj = document.getElementById(errId);
+				errObj.innerHTML = errMsg;
+				errObj.style.color = "red";
+				errObj.style.fontSize = "1.5em";
+			}
+			/* if valid, clear Error message, reset the focused field border */
+			function clearErr(fieldId, errId)
+			{
+			   var fieldObj = document.getElementById(fieldId);
+				fieldObj.style.border="";  // back to original setting
+				
+			   var errObj = document.getElementById(errId);
+			   errObj.innerHTML = "";  // empty the error message
+			}
+         </script>
+    
+</head>
+
+<body>
+  <a href = "http://www.senecacollege.ca/"> Seneca College  </a>
+  <h3> Trade Mark <sup>&reg;</sup> </h3>
+  <p id = "id1"> id focus </p>
+  
+  <form id="frm_ph" name="frm_ph" method = "post"
+        action = "https://httpbin.org/post"
+        onreset="alert('The form will be reset')"
+        onsubmit = "return validateMyForm(this);">
+        <!-- onsubmit="return validateMyForm(frm_ph);">  -->
+    <label> UserName:
+        <input type = "text" name = "uName" placeholder = "user Name"/>	
+	</label>
+    <label> Phone Number: 
+	    <input type="text" name="phone" id = "phoneId" placeholder="phone number in 10 digits"/>
+	</label>
+	<label id="phoneErr"> </label> <br>
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset" />
+    <!-- <input type="submit" value="Submit" onclick="return validateMyForm(frm_ph)"/> -->
+    <!-- <input type="submit" value="Submit" onclick="validateMyForm(frm_ph)"/>  -->
+  </form>
+
+
+</body>
+</html>

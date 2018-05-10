@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>HTML FORM</title>
+   <style> 
+      body { margin: 0 20%; }
+   </style>
+</head>
+<body>
+  <h1>Example - Grouping Fields: &lt;fieldset&gt; and &lt;legend&gt; tags</h1>
+
+   <form name="form1" action="https://httpbin.org/post" method="post">
+    <fieldset>
+	 <legend>Personal Information</legend>
+	    First Name: <input name="fname" id="fanme" type="text"><br>  
+	    Last Name: <input name="lname" id="lname" type="text">  <br>  
+	    Email: <input name="name3" id="email" type="email"> <br>  
+	    Telephone: <input name="phone" id="phone" value="416-" type="tel">
+	</fieldset> 
+    <br>
+    <input value="Submit" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;<input value="    Clear   " type="reset">
+  </form>
+  <hr>
+  
+  <h1>Example - Using &lt;label&gt; and &lt;button&gt; tags</h1>
+
+  <form id="form2" action="https://httpbin.org/post" method="post">
+  <h4>Label example 1</h4>
+  <div>
+     <label for="entry1" title="Free format">Text field 1</label>
+     <input name="entry1" id="entry1" type="text">
+  </div>
+  <div>
+     <label for="entry2" title="Free format">Text field 2</label> 
+     <input name="entry2" id="entry2">  <br>
+  </div>
+  
+  <h4>Label example 2</h4>
+  <p>
+     <label for="entry3" title="Label for entry3">
+	   <span>Text field 3 </span>
+       <input size="5" name="entry3" id="entry3"> <br>
+	 </label>
+  </p> 
+  <p> 
+     <label for="entry4" title="Label for entry4">
+	   <span>Text field 4 </span>
+       <input name="entry4" id="entry4">
+	 </label> 
+  </p>
+
+   <h4>&lt;button&gt; tag example</h4>
+   <button type="submit"> Submit </button>&nbsp;&nbsp;&nbsp;&nbsp;
+   <button type="reset" value="reset"> Reset </button>
+
+  </form>
+  
+
+
+</body></html>

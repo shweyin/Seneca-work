@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title> Validation</title>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+   </style>
+   <script>
+
+    function checkForAtleastOne () {
+	 
+	   if (get_checked_number() == 0) {                                       
+		  showErrors("<p>None checked, please check at least one</p>"); 
+		  return false; // return false - allow for changes - form not submitted
+	   }
+	   clearShowErrors();
+	   return true;         // return true � send out
+    }  // check at least ONE
+
+
+		function checkAllOfTheAbove()
+		{
+		var numberOfCheckboxes1 = document.example.system_type.length - 2;
+		
+		for (var i = 0; i < numberOfCheckboxes1 ; i++)
+		{
+			document.example.system_type[i].checked = true;
+		} // for
+		document.example.system_type[numberOfCheckboxes1].checked = true;
+		document.example.system_type[numberOfCheckboxes1+1].checked = false;
+		} //function checkAllOfTheAbove()
+		
+		/* Check None of the above */
+		function checkNoneOfTheAbove()
+		{
+			var numberOfCheckboxes = document.example.system_type.length - 2;
+			for (var j = 0; j <= numberOfCheckboxes ; j++)
+			{
+				document.example.system_type[j].checked = false;
+			}
+		}
+		
+	
+		/* Common Sense */
+		function commonSense() 
+		{
+			document.example.system_type[document.example.system_type.length - 1].checked = false;
+		}
+	 function get_checked_number() {
+		 var checkbox_num = document.example.system_type.length;
+		 var count = 0;
+
+		 for (var i = 0; i < checkbox_num; i++) {
+			 if (document.example.system_type[i].checked == true) { // true  = checked 
+				count++;
+			 } // end of if
+		 } // End of for
+
+		 return count;		
+    }
+	
+	function showErrors(messages) {   
+		document.querySelector('#errors').innerHTML = messages;
+	} 
+
+	function  clearShowErrors() {
+	   document.querySelector('#errors').innerHTML = " ";       
+	}  	
+   </script>
+ </head>
+ <body>
+   
+    <div id="content" style="font-family:monospace;font-size:14px;">
+	<h1>Example - JavaScript Form Validation</h1>
+	<h4><mark>input type="checkbox" </mark></h4>
+	<h4><mark>Rules: At least check one; Check all of the boxes; Check none of the boxes</mark></h4>
+    <!-- Start of example -->
+    <form method="post" name="example" action="https://httpbin.org/post" onsubmit="return checkForAtleastOne ();">
+	   <p>Operating system you use? </p>   
+	   <label><input name="system_type" value="Windows Vista" type="checkbox" onclick = "commonSense()">Windows Vista</label><br>
+	   <label><input name="system_type" value="Windows 7" type="checkbox" onclick = "commonSense()">Windows 7</label><br>      
+	   <label><input name="system_type" value="Windows 8" type="checkbox"onclick = "commonSense()">Windows 8</label><br>      
+	   <label><input name="system_type" value="Unix" type="checkbox" onclick = "commonSense()">Unix</label><br>
+	   <label><input name="system_type" value="Linux" type="checkbox" onclick = "commonSense()">Linux</label> <br>
+	   <label><input name="system_type" value="All" type = "checkbox" onclick="checkAllOfTheAbove()"> All of the above </label> <br>
+	   <label><input name="system_type" value="None" type="checkbox" onclick="checkNoneOfTheAbove()"> None of the above </label><br>
+
+	   <p>
+		  <input value="Submit Information" type="submit">
+		   &nbsp;&nbsp;
+		  <input value="    Clear   " onclick="clearShowErrors();" type="reset">  
+	   </p>		   
+	   <hr>
+	   <div id="errors"></div>
+	   <hr>		   
+	</form>
+    <!-- End of example -->
+
+    </div>
+ 
+ 
+</body></html>

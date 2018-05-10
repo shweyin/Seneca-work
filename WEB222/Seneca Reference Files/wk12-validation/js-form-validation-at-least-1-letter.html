@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>Validation</title>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+	  
+	  .errorsTable, .errorsTable td {vertical-align:top;}
+
+      .inputbox 
+	  { 
+            background-color: #ffffff; 
+            border-top:    7px dashed #0000ff; 
+            border-bottom: 7px dashed #0000ff; 
+            border-left:   7px solid  #ff0000; 
+            border-right:  7px solid  #ff0000; 
+      }
+      .inputtext 
+	  {
+            font-size: 14px; 
+            font-style:italic;
+            font-weight:bold;
+      }
+   </style>
+   <script>
+	  function formValidation(frm) {
+         return validateSurname(frm);
+      }
+	  
+      function validateSurname(frm) {
+        var passAlpha = false;
+        var alphString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var inputValue = frm.surname.value.trim();
+       
+	    if (inputValue.length == 0) {      /* check the length */
+		   alert("No input! Please enter a meaningful name with at least one Alphabet letter.\n");
+		   return false;
+        }
+		 
+        for (var i = 0; i < inputValue.length; i++) {
+           // check at least one character is a letter
+           if (alphString.indexOf(inputValue.substr(i,1))>= 0) {
+              passAlpha = true;
+           }
+        }  // for
+        
+        if (!passAlpha){
+           alert("Name : Please enter a meaningful name with at least one Alphabet letter.");
+           frm.surname.focus();
+           return false; // failed for validation
+        } 
+		
+		return true; // passed for validation
+      }  //  End of function
+   </script>
+ </head>
+ <body>
+    <div id="content" style="font-family:monospace;font-size:14px;">
+		<h1>JavaScript - Form Validation</h1>
+		<h4><mark> - Validating Text Field</mark></h4>
+		<h4><mark> - Rules:  </mark></h4>
+		<ul>
+		  <li><mark> Check for no input;</mark></li>
+		  <li><mark> at least one alphabetic letter</mark></li>
+		</ul>
+		
+		<!-- Start of example -->
+		<form id="example" name="form1" method="post" action="https://httpbin.org/post" onsubmit="return formValidation(this);"><br>
+		   
+		   <p>
+				<label title="Surname must contain at least one alphabetic letter ." for="client">Client Name</label> 
+				<span class="inputbox">
+				  <input class="inputtext" id="client" name="surname" autofocus="" required="" size="20" maxlength="15" type="text">
+				</span>
+		   </p>
+		   <br>
+		   
+		   <p>
+			  <input value="Submit Information" type="submit"> &nbsp;&nbsp;  
+			  <input value="    Clear   " type="reset">  
+		   </p> 
+		</form>
+		<!-- End of example -->
+
+    </div>
+    
+   
+ 
+</body></html>

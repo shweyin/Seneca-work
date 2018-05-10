@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title> DOM programming </title>
+
+</head>
+<body>
+  <div id = "div1">
+     <h1 id = "gg"> greeting... id = "gg" </h1>
+     <p id = "hi"> Good Morning .... id = "hi" </p>
+     <p id = "p2"> Enjoy! ... id = "p2"</p>
+
+  </div>
+
+  <div id = "div2">
+      <p> p1 in div2 </p>
+      <p> p2 in div2 </p>
+      <p> p3 in div2 </p>
+  </div>
+
+   <script>
+      document.write("<br/>/////////////////////////////////////////////////////////////////////<br/>");
+      document.write("Testing: access DOM element <br/>");
+         // test querySelector(), innerHTML
+		 // access the content
+		/*
+    	          var x = document.querySelector("#hi");
+    	          var txt = x.innerHTML;
+		    	  document.write(txt);
+			*/
+			// change the content of the paragraph element
+			/*	  var x = document.querySelector("#hi");
+				  document.getElementById("hi").innerHTML = "Lucky! -changed by JS"; 
+			*/
+			// test getElementsByTagName()
+			/*	var m = document.querySelector("#div1");
+     	         var a = m.getElementsByTagName("p");
+
+    	         for (var i = 0; i < a.length; i++)
+     	         {
+     	            var no = i+1;
+     	            document.write("<br/> Paragraph " + no + " :" + a[i].innerHTML + "<br/>");
+  	              }			
+			*/
+	
+		// set CSS style using script
+	   /*var txt = "Change paragraph using script. ";
+  	   document.getElementById("hi").innerHTML = txt;
+  	   document.getElementById("hi").style.color = "red";
+  	   document.getElementById("hi").style.fontSize = "30px";
+		*/
+	   </script>
+
+
+</body>
+</html>

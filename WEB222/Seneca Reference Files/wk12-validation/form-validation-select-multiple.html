@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>Validation</title>
+   <script src="validation-select-multiple.js"></script>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+   </style>
+ </head>
+ <body>
+  <div id="content" style="font-family:monospace;font-size:14px;">
+	<h1>Example - JavaScript Form Validation</h1>
+	<p><mark>select / options - with single multiple selections</mark></p>
+
+    <!-- Start of example -->
+    <form method="post" name="example" action="https://httpbin.org/post" onsubmit="return checkForm();">       
+      <table>
+		<tbody><tr>
+		 <td>
+		 <p>Wish list for today</p> 
+		  <select name="whatToDo" size="6" multiple="multiple">
+			<option value="1"> Drink Coffee </option>
+			<option value="2"> Read A Book </option>
+			<option value="3"> Take A Walk </option>
+			<option selected="selected" value="4"> Buy A Bagel </option>
+			<option selected="selected" value="5"> Watch TV    </option>
+			<option value="6"> Write a test </option>
+		  </select>
+		 </td>
+		 <td>
+		   <ul>
+			<li>******* Select options logic **** multiple="multiple" ****</li>
+			<li>Get the number of the select options using length</li>
+			<li><mark>document.example.whatToDo.options.length;</mark></li>
+			<li>Loop to check which one was selected</li>
+			<li>To determine which one is selected - if any - check if 
+			  <ul>
+				<li><mark>if (document.example.whatToDo[i].selected == true) // selected</mark>
+				  <ul>
+				   <li>document.example.whatToDo[i].value</li>
+				   <li>document.example.whatToDo[i].text</li>
+				  </ul>        
+				</li><li>
+			  </li></ul></li>
+		   </ul> 
+		 </td>
+		</tr>
+		<tr>
+		 <th colspan="2">
+		  <p>
+			 <input value="Submit Information" type="submit">
+			  &nbsp;&nbsp;
+			 <input value="    Clear   " onclick="clearShowErrors();" type="reset">  
+		  </p> 
+		  <hr>
+		 </th>
+		</tr>
+		<tr>
+		 <td colspan="2">
+		  <div id="errors"><p>No. of select wish list options = <mark>6</mark></p><p>You have selected - <mark></mark></p><p>You have selected <mark>Buy A Bagel</mark> with a value of <mark>4</mark></p><p>You have selected <mark>Watch TV</mark> with a value of <mark>5</mark></p><p></p></div> 
+		 </td>
+		</tr>
+
+	  </tbody></table>
+	</form>
+    <!-- End of example -->
+
+    </div>
+ 
+</body></html>

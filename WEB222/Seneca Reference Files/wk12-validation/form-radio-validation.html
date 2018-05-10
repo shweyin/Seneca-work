@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>validation</title>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+   </style>
+   <script>
+	  function checkForm() {
+		/*  alert(document.example.system_type[0].value); */
+		 var radio_num = document.example.system_type.length;
+		 var onechecked = false;  
+
+		 for (var i = 0; i < radio_num; i++) {
+			 if (document.example.system_type[i].checked == true) { // true  = checked 
+				onechecked = true;
+			 } // end of if
+		 } // End of for
+
+		 if (!onechecked) {                                        
+			  messages = "<p>None checked</p>"; 
+			  showErrors(messages); // return false - allow for changes - form not submitted
+			  return false;
+		 }
+		 clearErrors();
+		 return true;         // return true - send out
+		
+    } // End of function
+
+
+
+	function showErrors(messages) {   
+		document.querySelector('#errors').innerHTML = messages;
+	} 
+
+	function  clearErrors() {
+	   document.querySelector('#errors').innerHTML = " ";        
+	}  	
+   </script>
+ </head>
+ <body>
+  
+    <div id="content" style="font-family:monospace;font-size:14px;">
+    <h1>Example - JavaScript Form Validation</h1>
+    <h4><mark>input type="radio" </mark></h4>
+	<h4><mark>Rule: must select one</mark></h4>
+
+    <!-- Start of example -->
+    <form method="post" name="example" action="https://httpbin.org/post" onsubmit="return checkForm();">
+		   <p>Operating system you use? </p>   
+		   <label><input name="system_type" value="Windows Vista" type="radio">Windows Vista</label><br>
+		   <label><input name="system_type" value="Windows 7" type="radio">Windows 7</label><br>      
+		   <label><input name="system_type" value="Windows 8" type="radio">Windows 8</label><br>      
+		   <label><input name="system_type" value="Unix" type="radio">Unix</label><br>
+		   <label><input name="system_type" value="Linux" type="radio">Linux</label>
+		   
+		  <p>
+			 <input value="Submit Information" type="submit">
+			  &nbsp;&nbsp;
+			 <input value="    Clear   " onclick="clearErrors();" type="reset">  
+		  </p> 
+		  <hr>
+		  <div id="errors"></div>
+		  <hr>
+	</form>
+    <!-- End of example -->
+
+    </div>
+
+ 
+</body></html>

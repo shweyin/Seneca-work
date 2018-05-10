@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>Validation</title>
+   <script src="js-form-validation-multipleField-error-on-page_files/form-validation-multipleField-error-on-page.js"></script>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+	  
+	  .errorsTable, .errorsTable td {vertical-align:top;}
+
+      .inputbox 
+	  { 
+            background-color: #ffffff; 
+            border-top:    7px dashed #0000ff; 
+            border-bottom: 7px dashed #0000ff; 
+            border-left:   7px solid  #ff0000; 
+            border-right:  7px solid  #ff0000; 
+      }
+      .inputtext 
+	  {
+            font-size: 14px; 
+            font-style:italic;
+            font-weight:bold;
+      }
+   </style>
+ </head>
+ <body>
+    
+    <div id="content" style="font-family:monospace;font-size:14px;">
+	<h1>JavaScript - Form Validation</h1>
+    <h4><mark> - Multiple text field validateion and Show error messages on the web page</mark></h4>
+	<ul>
+	  <li> Validating name
+	    <ul>
+		  <li><mark> must present</mark></li>
+	      <li><mark> minimum 4 </mark></li>
+		  <li><mark> all alphabetic letters
+</mark></li>
+		</ul>
+	  </li>
+	  <li> Validating phone number
+	    <ul>
+		  <li><mark> must present; </mark></li>
+		  <li><mark> in the format: ###-###-####</mark></li>
+		</ul>
+	  </li>
+	  
+	</ul>
+       <!-- Start of example -->
+	   <form id="example" name="example" method="post" action="https://formpost.azurewebsites.net/home/test" onsubmit="return formValidationExample();"><br>
+		  
+		  <p>
+		      <label title="Name must have a minimum of 4 alphabetic characters." for="client">Client Name</label> 
+			  <span class="inputbox">
+				<input class="inputtext" id="client" name="surname" autofocus="" required="" size="20" maxlength="15">
+			  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  
+		  
+		      <label title="Phone number must have the format of ###-###-####." for="pnumber"> Phone Number </label> 
+			  <span class="inputbox">
+				<input class="inputtext" id="pnumber" name="phone" required="" size="20" maxlength="15">
+			  </span>
+		  </p><br>
+		  
+		  <p>
+			 <input value="Submit Information" type="submit">
+			  &nbsp;&nbsp;
+			 <input value="    Clear   " onclick="clearErrors();" type="reset">  
+		  </p>
+		  
+		  <!-- div element is used for showing error message -->
+		  <div id="errors"></div>
+		  
+	  </form>
+      <!-- End of example -->
+
+    </div>
+   
+ 
+</body></html>

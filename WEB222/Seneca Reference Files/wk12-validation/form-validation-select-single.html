@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="UTF-8">
+   <title>Validation</title>
+   <script src="validation-select-single.js"></script>
+   <style> 
+      body { margin: 0 10%; }
+	  
+	  form {  
+              border: 10px solid #00ff00; 
+              padding: 5px; 
+      }
+   </style>
+ </head>
+ <body>
+    <div id="content" style="font-family:monospace;font-size:14px;">
+	<h1>Example - JavaScript Form Validation</h1>
+	<p><mark>select / options - with single selection</mark></p>
+
+    <!-- Start of example -->
+    <form method="post" name="example" action="https://httpbin.org/post" onsubmit="return checkForm();">       
+	   <table>
+		<tbody><tr>
+		 <td>
+		 <p>What would you like to do today?</p> 
+		  <select name="whatToDo" size="1">
+			<option value="1"> Drink Coffee </option>
+			<option value="2"> Read A Book </option>
+			<option value="3"> Take A Walk </option>
+			<option value="4"> Buy A Bagel </option>
+			<option value="5"> Watch TV    </option>
+			<option value="6"> Write a test </option>
+		  </select>
+		 </td>
+		 <td>
+		   <ul>
+			<li>******* Select options logic ********</li>
+			<li>Get the selectedIndex</li>
+			<li><mark>var x = document.example.whatToDo.selectedIndex;</mark></li>
+			<li>If selectedIndex == <mark> -1 </mark> &nbsp;None are selected</li>
+			<li>If the selectedIndex is NOT -1
+			  <ul>
+				<li><mark>document.example.whatToDo.options[x].value; - for the value</mark></li>
+				<li><mark>document.example.whatToDo.options[x].text;  - for the text</mark></li>
+			  </ul></li>
+		   </ul> 
+		 </td>
+		</tr>
+		<tr>
+		 <th colspan="2">
+		  <p>
+			 <input value="Submit Information" type="submit">
+			  &nbsp;&nbsp;
+			 <input value="    Clear   " onclick="clearShowErrors();" type="reset">  
+		  </p> 
+		  <hr>
+		 </th>
+		</tr>
+		<tr>
+		 <td colspan="2">
+		  <div id="errors"></div> 
+		 </td>
+		</tr>
+
+	  </tbody></table>
+	</form>
+    <!-- End of example -->
+
+    </div>
+    <!-- Defining Footer -->
+ 
+</body></html>
