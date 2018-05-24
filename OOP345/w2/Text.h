@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <string>
 namespace sict
 {
 	class Text
 	{
-		int str_size;
 		std::string* str;
 	public:
 		Text();
@@ -16,6 +16,6 @@ namespace sict
 		void setEmpty();
 		Text& operator=(Text&);
 		Text& operator=(Text&&);
-		int size() const;
+		size_t size() const;
 	};
 }
