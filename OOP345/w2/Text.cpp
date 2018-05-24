@@ -5,6 +5,7 @@ namespace sict
 	void Text::setEmpty()
 	{
 		str = nullptr;
+		str_size = 0;
 	}
 	Text::Text()
 	{
@@ -18,15 +19,19 @@ namespace sict
 		if (fs.is_open())
 		{
 			int count = 0;
-			while (!fs.eof())
+			std::string garbage;
+			while (std::getline(fs, garbage))
 			{
 				count++;
 			}
-			str = new std::string[count+1];
+			fs.close();
+			fs.open(con_str);
+			str_size = count + 1;
+			str = new std::string[str_size];
 			str[0] = con_str;
 			for (int i = 1; i < count; i++)
 			{
-				getline
+				std::getline(fs, str[i]);
 			}
 			fs.close();
 		}
@@ -51,6 +56,7 @@ namespace sict
 		{
 			delete[] str;
 			str = new std::string[mytxt.size()];
+			str_size = mytxt.size();
 			for (int i = 0; i < size(); i++)
 			{
 				str[i] = mytxt.str[i];
@@ -64,12 +70,13 @@ namespace sict
 		{
 			delete[] str;
 			str = mytxt.str;
+			str_size = mytxt.size();
 			mytxt.setEmpty();
 		}
 		return *this;
 	}
 	size_t Text::size() const
 	{
-		return sizeof(str);
+		return str_size;
 	}
 }

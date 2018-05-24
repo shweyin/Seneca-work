@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 	steady_clock::time_point cs, ce;
 	std::ofstream file("timer.txt");
 	{
-		std::cout << std::fixed << std::setprecision(3);
+ 		std::cout << std::fixed << std::setprecision(3);
 		cs = steady_clock::now();
 		sict::Text a;
 		ce = steady_clock::now();
