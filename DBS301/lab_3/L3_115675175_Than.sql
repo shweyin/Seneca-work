@@ -61,22 +61,7 @@ WHERE UPPER(city) LIKE 'S%' AND LENGTH(city) >= 8;
 -- THURSDAY, August the Thirty-First of year 1998
 -- Sort by review date
 
-SELECT last_name AS "Last Name", hire_date AS "Hire Date",
-    (CASE
-    when to_char(add_months(hire_date, 12), 'fmday') = 'friday' then
-        hire_date + 6
-    when to_char(add_months(hire_date, 12), 'fmday') = 'saturday' then
-        hire_date + 5
-    when to_char(add_months(hire_date, 12), 'fmday') = 'sunday' then
-        hire_date + 4
-    when to_char(add_months(hire_date, 12), 'fmday') = 'monday' then
-        hire_date + 3
-    when to_char(add_months(hire_date, 12), 'fmday') = 'tuesday' then
-        hire_date + 2
-    when to_char(add_months(hire_date, 12), 'fmday') = 'wednesday' then
-        hire_date + 1
-    end
-    ) AS "REVIEW DAY"
+SELECT last_name AS "Last Name", hire_date AS "Hire Date",TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date, 12), 'thursday'), 'fmDAY, Monthfm "the" ddspth "of year" YYYY') AS "REVIEW DAY"
 FROM employees
 WHERE hire_date > TO_DATE('1997/01/01', 'YYYY/MM/DD')
 ORDER BY "REVIEW DAY";
