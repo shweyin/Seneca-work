@@ -2,14 +2,14 @@
 // Shweyin Than
 // 6/12/2018
 
-#include "Message.cpp"
+#include "Message.h"
 const int msg_array_size = 10;
 namespace sict
 {
 	class Notifications {
-		Message msg_array[msg_array_size];
+		std::vector <Message> msg_vector;
 	public:
-		Notifications(std::ifstream& ifstr);
+		Notifications(std::ifstream&);
 		Notifications(Notifications&&);
 		Notifications& operator=(Notifications&&);
 		~Notifications();

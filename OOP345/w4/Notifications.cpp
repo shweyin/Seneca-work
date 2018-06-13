@@ -6,25 +6,35 @@
 
 namespace sict
 {
-	Notifications::Notifications(std::ifstream& ifstr)
+	Notifications::Notifications(std::ifstream& in)
 	{
-		while ()
+		for (unsigned int i = 0; i < msg_vector.size(); i++)
 		{
-
+			msg_vector.push_back(Message(in, '\n'));
 		}
 	}
-	Notifications::Notifications(Notifications &&)
+	Notifications::Notifications(Notifications&& target_obj)
 	{
+		*this = std::move(target_obj);
 	}
-	Notifications & Notifications::operator=(Notifications &&)
+	Notifications& Notifications::operator=(Notifications&& target_obj)
 	{
-		// TODO: insert return statement here
+		if (this != &target_obj)
+		{
+			msg_vector = target_obj.msg_vector;
+		}
+		return *this;
 	}
 	Notifications::~Notifications()
 	{
-		delete[] msg_array;
 	}
-	void Notifications::display(std::ostream &) const
+	void Notifications::display(std::ostream& ostr) const
 	{
+		for (unsigned int i = 0; i < msg_vector.size(); i++)
+		{
+			msg_vector[i].display;
+		}
+		ostr << "Press any key to continue...";
+		std::cin.ignore();
 	}
 }
