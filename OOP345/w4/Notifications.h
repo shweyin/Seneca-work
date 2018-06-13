@@ -3,7 +3,7 @@
 // 6/12/2018
 
 #include "Message.h"
-const int msg_array_size = 10;
+const int max_msg_size = 10;
 namespace sict
 {
 	class Notifications {

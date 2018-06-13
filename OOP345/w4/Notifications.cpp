@@ -8,7 +8,7 @@ namespace sict
 {
 	Notifications::Notifications(std::ifstream& in)
 	{
-		for (unsigned int i = 0; i < msg_vector.size(); i++)
+		for (int i = 0; i < max_msg_size; i++)
 		{
 			msg_vector.push_back(Message(in, '\n'));
 		}
@@ -30,9 +30,10 @@ namespace sict
 	}
 	void Notifications::display(std::ostream& ostr) const
 	{
-		for (unsigned int i = 0; i < msg_vector.size(); i++)
+		for (int i = 0; i < msg_vector.size(); i++)
 		{
-			msg_vector[i].display;
+			msg_vector.at(i).display(ostr);
+			ostr << std::endl;
 		}
 		ostr << "Press any key to continue...";
 		std::cin.ignore();
