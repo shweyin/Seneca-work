@@ -33,9 +33,8 @@ namespace sict
 		for (int i = 0; i < msg_vector.size(); i++)
 		{
 			msg_vector.at(i).display(ostr);
-			ostr << std::endl;
 		}
-		ostr << "Press any key to continue...";
+		ostr << std::endl << "Press any key to continue...";
 		std::cin.ignore();
 	}
 }
