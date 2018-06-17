@@ -42,27 +42,70 @@ WHERE salary = (
 
 SELECT city
 FROM locations
-WHERE location_id = (
+WHERE location_id IN (
     SELECT location_id
     FROM departments
-    WHERE department_id = (
+    WHERE department_id IN (
         SELECT department_id
         FROM employees
-        WHERE salary = (
+        WHERE salary IN (
             SELECT MIN(salary)
             FROM employees)));
             
 --7.	Display the last name, department_id, and salary of the lowest paid employee(s) in each department.  Sort by Department_ID. (HINT: careful with department 60)
 
-SELECT last_name, departmen
-
-
-
-SELECT employee_id
+SELECT last_name, department_id, salary AS "SALARY"
 FROM employees
-WHERE 
+WHERE (salary, department_id) IN (
+    SELECT MIN(salary) AS "SALARY", department_id
+    FROM employees
+    WHERE department_id IS NOT NULL
+    GROUP BY department_id)
+ORDER BY department_id;
 
 --8.	Display the last name of the lowest paid employee(s) in each city
+
+SELECT last_name
+FROM   (SELECT last_name, city, salary
+        FROM (employees e INNER JOIN departments d ON d.department_id = e.department_id)
+        INNER JOIN locations l ON l.location_id = d.location_id)
+WHERE (salary, city) IN 
+    (
+    SELECT MIN(salary), city
+    FROM (SELECT last_name, city, salary
+          FROM (employees e INNER JOIN departments d ON d.department_id = e.department_id)
+          INNER JOIN locations l ON l.location_id = d.location_id)
+    GROUP BY city
+    )
+ORDER BY last_name
+
 --9.	Display last name and salary for all employees who earn less than the lowest salary in ANY department.  Sort the output by top salaries first and then by last name.
 
+SELECT last_name, salary
+FROM employees
+WHERE salary < ANY(
+    SELECT MIN(salary)
+    FROM employees
+    GROUP BY department_id)
+ORDER BY salary DESC, last_name
+
 --10.	Display last name, job title and salary for all employees whose salary matches any of the salaries from the IT Department. Do NOT use Join method.
+
+SELECT last_name, job_id, salary
+FROM employees
+WHERE salary IN (
+    SELECT salary
+    FROM employees
+    WHERE UPPER(job_id) LIKE ('IT%'))
+
+
+
+
+
+
+
+
+
+
+
+
