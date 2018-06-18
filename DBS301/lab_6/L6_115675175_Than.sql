@@ -77,7 +77,7 @@ WHERE (salary, city) IN
           INNER JOIN locations l ON l.location_id = d.location_id)
     GROUP BY city
     )
-ORDER BY last_name
+ORDER BY last_name;
 
 --9.	Display last name and salary for all employees who earn less than the lowest salary in ANY department.  Sort the output by top salaries first and then by last name.
 
@@ -87,7 +87,7 @@ WHERE salary < ANY(
     SELECT MIN(salary)
     FROM employees
     GROUP BY department_id)
-ORDER BY salary DESC, last_name
+ORDER BY salary DESC, last_name;
 
 --10.	Display last name, job title and salary for all employees whose salary matches any of the salaries from the IT Department. Do NOT use Join method.
 
@@ -96,7 +96,7 @@ FROM employees
 WHERE salary IN (
     SELECT salary
     FROM employees
-    WHERE UPPER(job_id) LIKE ('IT%'))
+    WHERE UPPER(job_id) LIKE ('IT%'));
 
 
 
