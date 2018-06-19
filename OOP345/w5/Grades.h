@@ -16,13 +16,14 @@ namespace sict
 		void displayGrades(std::ostream&, T) const;
 		Grades(Grades&) = delete;
 		void operator=(Grades&) = delete;
+
 	};
 	template<typename T>
 	inline void Grades::displayGrades(std::ostream& ostr, T) const
 	{
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < std_number.size(); i++)
 		{
-			//TODO ostr << std::endl;
+			ostr << std_number[i] << " " << std_grade[i] << " " << /*TODO*/ << std::endl;
 		}
 	}
 }

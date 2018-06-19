@@ -3,7 +3,7 @@ namespace sict {
 	enum Letter { Aplus, A, Bplus, B, Cplus, C, Dplus, D, F };
 
 	template<typename T>
-	char* convert_grade(const T grade)
+	T convert_grade(Letter grade)
 	{
 		char gradestring[3];
 		switch (grade)

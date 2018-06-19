@@ -20,7 +20,7 @@ namespace sict
 		}
 		else
 		{
-			throw ("poop");
+			throw ("poop it's not open");
 		}
 	}
 }
