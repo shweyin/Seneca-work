@@ -8,19 +8,17 @@ namespace sict
 		fs.open(filename);
 		if (fs.is_open())
 		{
-			float temp1;
-			float temp2;
-			while (!std::cin.eof())
+			double temp1;
+			double temp2;
+			while (fs>>temp1>>temp2)
 			{
-				std::cin >> temp1;
 				std_number.push_back(temp1);
-				std::cin >> temp2;
-				std_number.push_back(temp2);
+				std_grade.push_back(temp2);
 			}
 		}
-		else
+		else 
 		{
-			throw ("poop it's not open");
+			throw ("The file...it's not open");
 		}
 	}
 }

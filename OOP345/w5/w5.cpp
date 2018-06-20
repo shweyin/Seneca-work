@@ -34,14 +34,51 @@ int main(int argc, char* argv[]) {
 	sict::Grades grades(argv[1]);
 	// lambda expression for converting to letter 
 
+	auto gradeToLetter = [](double gradeDouble) 
+	{
+		Letter gradeEnum;
+		if (gradeDouble >= 90)
+		{
+			gradeEnum = Aplus;
+		}
+		else if (gradeDouble >= 80)
+		{
+			gradeEnum = A;
+		}
+		else if (gradeDouble >= 75)
+		{
+			gradeEnum = Bplus;
+		}
+		else if (gradeDouble >= 70)
+		{
+			gradeEnum = B;
+		}
+		else if (gradeDouble >= 65)
+		{
+			gradeEnum = Cplus;
+		}
+		else if (gradeDouble >= 60)
+		{
+			gradeEnum = C;
+		}
+		else if (gradeDouble >= 55)
+		{
+			gradeEnum = Dplus;
+		}
+		else if (gradeDouble >= 50)
+		{
+			gradeEnum = D;
+		}
+		else
+		{
+			gradeEnum = F;
+		}
+		return gradeEnum;
+	};
 
 
 
-
-
-
-
-	grades.displayGrades(std::cout, );
+	grades.displayGrades(std::cout, gradeToLetter);
 
 
 	// report the error message
@@ -49,4 +86,3 @@ int main(int argc, char* argv[]) {
 		<< argv[1] << "\n";
 	return 2;
 }
- }

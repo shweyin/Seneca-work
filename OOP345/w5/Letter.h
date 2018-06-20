@@ -2,40 +2,29 @@
 namespace sict {
 	enum Letter { Aplus, A, Bplus, B, Cplus, C, Dplus, D, F };
 
-	template<typename T>
-	T convert_grade(Letter grade)
+	const char* letterToGrade(const Letter grade)
 	{
-		char gradestring[3];
 		switch (grade)
 		{
 		case Aplus:
-			std::strncpy(gradestring, "A+");
-			break;
+			return "A+";
 		case A:
-			std::strncpy(gradestring, "A");
-			break;
+			return "A";
 		case Bplus:
-			std::strncpy(gradestring, "B+");
-			break;
+			return "B+";
 		case B:
-			std::strncpy(gradestring, "B");
-			break;
+			return "B";
 		case Cplus:
-			std::strncpy(gradestring, "C+");
-			break;
+			return "C+";
 		case C:
-			std::strncpy(gradestring, "C");
-			break;
+			return "C";
 		case Dplus:
-			std::strncpy(gradestring, "D+");
-			break;
+			return "D+";
 		case D:
-			std::strncpy(gradestring, "D");
-			break;
+			return "D";
 		case F:
-			std::strncpy(gradestring, "F");
-			break;
+			return "F";
 		}
-		return gradestring;
+		return "NA";
 	}
 }
