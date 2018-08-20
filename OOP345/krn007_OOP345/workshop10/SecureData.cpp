@@ -96,7 +96,6 @@ namespace w10 {
 				ifs >> tmpc;
 				nbytes++;
 			}
-
 			if (text)
 			{
 				delete[] text;
