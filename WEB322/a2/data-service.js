@@ -1,2 +1,0 @@
-var employees = [];
-var departments = [];

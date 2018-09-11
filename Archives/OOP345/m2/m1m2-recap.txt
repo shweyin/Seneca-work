@@ -1,0 +1,97 @@
+Hello 345,
+
+We started our exploration converting simple pythin neural net examples into C++ with
+
+https://medium.com/technology-invention-and-more/how-to-build-a-simple-neural-network-in-9-lines-of-python-code-cc8f23647ca1
+
+and soon discovered it involved more math than we bargined for.
+
+Python numpy function 'dot' was not a dot (inner) product but was a matrix-vector multiply.
+
+  matMult(VEC a, MAT B, VEC c) { // a = B * c
+    for(size_t row = 0; row < B.size(); row++)
+      a[row] = inner_product(B[row].begin(), B[row].end(), c.begin(), 0.);
+  }
+
+or if you prefer.  (I prefer the above.  It is shorter.)
+
+  matMult(VEC a, MAT B, VEC c) { // a = B * c
+    for(size_t row = 0; row < B.size(); row++) {
+      T sum = 0;
+      for(size_t col = 0; col < B[0].size(); col++) {
+        sum += B[row]col] * c{col];
+      }
+      a[row] = sum;
+  }
+
+So on to Milestone 2:
+
+https://iamtrask.github.io/2015/07/12/basic-python-network/
+  A Neural Network in 11 lines of Python (Part 1)
+  A bare bones neural network implementation to describe the inner workings of backpropagation.
+
+https://iamtrask.github.io/2015/07/27/python-network-part2/
+  A Neural Network in 13 lines of Python (Part 2 - Gradient Descent)
+  Improving our neural network by optimizing Gradient Descent
+
+and soon discovered it involved more math than we bargined for.
+
+Python numpy funcction 'dot' was also a matrix-matrix multiply plus a matrix equals vector multiply vector outer product.
+
+The vector equals matrix-multiply-vector is simply a dot (inner) product between each row of the matrix and the vector.
+
+Matrix multiply matrix is generalization of a matrix-vector multiply:
+
+For each row of the first matric and each column of the second matrix, form the output matrix alement as the inner product of the two.
+
+  matMult(MAT A, MAT B, MAT C) { // A = B * C
+    for(size_t row = 0; row < B.size(); row++) {
+      for(size_t col = 0; col < C[0].size(); col++) {
+        T sum = 0;
+        for(size_t k = 0; k < C.size(); k++) {
+          sum += B[row][k] * C[k][col];
+        a[row][col] = sum;
+        }
+      }
+    }
+  }
+
+  Note the number of column for matrix B must equal the number of rows for matrix C.
+
+The outer product of a pair of vectors is easy to calculate.  
+
+  matMult(MAT A, VEC b, VEC c) { // A = b * c
+    for(size_t row = 0; row < b.size(); row++)
+      for(size_t col = 0; col < c.size(); col++)
+        A[row][column] = b[row] * c[column];
+  }
+
+
+So where are we with respect to Milestone 1 and 2.
+The purpose of the project is for you to demonstrate you can program in C++.
+
++++++++++++++++
++ Milestone 1 +
++++++++++++++++
+There are three python programs in 
+https://medium.com/technology-invention-and-more/how-to-build-a-simple-neural-network-in-9-lines-of-python-code-cc8f23647ca1
+
+I have converted the first two to C++.  nine.cpp and main-28.cpp.
+
+You need to convert the third python program to C++ producing m1.cpp.
+
++++++++++++++++
++ Milestone 2 +
++++++++++++++++
+There are five python programs in 
+https://iamtrask.github.io/2015/07/12/basic-python-network/
+
+I have converted the first pair to C++.  m2a.cpp and m1b.cpp.
+
+You need to convert the remaining three python program to C++ producing m1c.cpp, m2d.cpp, and m2e.cpp.
+
+Take a look at https://iamtrask.github.io/2015/07/27/python-network-part2/
+
+You should be able to understand how to convert the python programs to C++.
+
+Due to the time constraints for the semester, that's it.
